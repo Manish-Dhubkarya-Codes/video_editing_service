@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* -------------------------------
+   CUSTOM THEME VARIABLES
+--------------------------------*/
+:root {
+  --primary: #1e40af;
+  --accent: #d97706;
+  --textLight: #6b7280;
+  --neutral: #f3f4f6;
+
+  --color-primary: #030712;
+  --color-accent: #00f0ff;
+  --color-accent-secondary: #7000ff;
+  --color-gold-cyber: #ffc400;
+
+  --font-display: "Orbitron", sans-serif;
+  --font-mono: "Share Tech Mono", monospace;
+}
+
+/* -------------------------------
+      ONLY CUSTOM UTILITIES
+   (Do NOT override Tailwind classes)
+--------------------------------*/
+
+/* Cyber Tool Tag */
+.tool-tag-cyber {
+  @apply px-4 py-2 text-sm font-bold tracking-wider rounded-full transition-all;
+  @apply bg-gray-800 text-white border border-gray-700 hover:bg-opacity-50 hover:border-accent hover:text-accent;
+  box-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+  font-family: var(--font-mono);
+}
+
+/* 3D helper classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Mask gradient for vertical scroll list */
+.mask-image-gradient {
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* -------------------------------
+      ANIMATIONS
+--------------------------------*/
+@keyframes infinite-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-33.33%); }
+}
+.animate-infinite-scroll {
+  animation: infinite-scroll 22s linear infinite;
+}
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-drop {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+.animate-scroll-drop {
+  animation: scroll-drop 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes slide-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-in {
+  animation: slide-in 0.8s forwards;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
+}
