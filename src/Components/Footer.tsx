@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-primary text-white pt-20 pb-10 border-t border-white/10">
+    <footer className="bg-[#000000] text-white pt-20 pb-10 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Section: 4 Column Grid */}
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           {/* Column 1: Brand Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-2xl font-bold tracking-tight">
-              <span className="bg-accent text-white px-2 py-1 rounded-lg">Pro</span>
+              <span className="bg-[#00f0ff] text-white px-2 py-1 rounded-lg">Pro</span>
               <span>Edit Services</span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             </p>
             {/* Social Icons */}
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1da1f2] hover:text-white transition-all duration-300">
                 <FaTwitter />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all duration-300">
@@ -61,15 +61,30 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6 relative inline-block">
               Company
-              <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-accent rounded-full"></span>
+              <span className="absolute bottom-8 left-0 w-12 h-1 bg-accent rounded-full"></span>
             </h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-gray-300 hover:text-accent hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
-                    {/* Tiny arrow appears on hover via CSS group typically, here simple logic */}
-                    <FaArrowRight className="text-xs opacity-50" /> {link.name}
-                  </a>
+                  <a 
+  href={link.href} 
+  className="group relative flex w-fit items-center gap-2 text-sm text-gray-300 transition-all duration-300 hover:text-[#00E6FF]"
+>
+  {/* Animated Arrow: Slides in from left and fades in */}
+  <FaArrowRight 
+    className="text-xs text-[#00E6FF] opacity-0 -translate-x-2 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" 
+  />
+
+  {/* Link Name */}
+  <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+    {link.name}
+  </span>
+
+  {/* Advanced Bottom Border: Expands width + Glows */}
+  <span 
+    className="absolute -bottom-1 left-0 h-1 w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"
+  ></span>
+</a>
                 </li>
               ))}
             </ul>
@@ -79,15 +94,31 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6 relative inline-block">
               Services
-              <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-accent rounded-full"></span>
+              <span className="absolute -bottom-8 left-0 w-12 h-1 bg-accent rounded-full"></span>
             </h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="text-gray-300 hover:text-accent hover:pl-2 transition-all duration-300 text-sm flex items-center gap-2">
-                    <FaArrowRight className="text-xs opacity-50" /> {link.name}
-                  </a>
-                </li>
+  <a 
+    href={link.href} 
+    className="group relative flex w-fit items-center gap-2 text-sm text-gray-300 transition-all duration-300 hover:text-[#00E6FF]"
+  >
+    {/* Arrow: Slides in from left, fades in, and matches the cyan color */}
+    <FaArrowRight 
+      className="text-xs text-[#00E6FF] opacity-0 -translate-x-2 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" 
+    />
+    
+    {/* Link Name: Nudges slightly right on hover */}
+    <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+      {link.name}
+    </span>
+
+    {/* Bottom Border: Expands from 0 to 100% with the Neon Glow */}
+    <span 
+      className="absolute -bottom-1 left-0 h-1 w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"
+    ></span>
+  </a>
+</li>
               ))}
             </ul>
           </div>
@@ -96,7 +127,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6 relative inline-block">
               Stay Updated
-              <span className="absolute bottom-[-8px] left-0 w-12 h-1 bg-accent rounded-full"></span>
+              <span className="absolute -bottom-8 left-0 w-12 h-1 bg-accent rounded-full"></span>
             </h3>
             <p className="text-gray-300 text-sm mb-4">
               Subscribe to get the latest video trends and editing tips delivered to your inbox.
@@ -105,9 +136,9 @@ const Footer: React.FC = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
+                className="w-full px-4 py-3 bg-white border border-white/10 rounded-lg text-black placeholder-gray-500 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
               />
-              <button className="w-full py-3 bg-accent hover:bg-blue-600 text-white font-bold rounded-lg transition-colors duration-300">
+              <button className="w-full cursor-pointer py-3 bg-accent hover:bg-blue-600 text-white font-bold rounded-lg transition-colors duration-300">
                 Subscribe
               </button>
             </form>
@@ -134,7 +165,7 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Made With Love */}
-            <div className="flex items-center gap-1 text-gray-500 text-sm">
+            <div className="flex items-center gap-1 text-green-400 text-sm">
               <span>Made with</span>
               <FaHeart className="text-red-500 animate-pulse" />
               <span>in India</span>

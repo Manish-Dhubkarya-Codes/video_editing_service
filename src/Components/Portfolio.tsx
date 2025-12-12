@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FaPlay, FaTimes, FaArrowsAltH, FaBolt, FaFilter } from 'react-icons/fa';
+import { FaPlay, FaTimes, FaArrowsAltH, FaBolt } from 'react-icons/fa';
 
 // --- Data ---
 const categories = ['All', 'YouTube', 'Reels', 'Ads', 'Wedding'];
@@ -93,7 +93,7 @@ const Portfolio: React.FC = () => {
                key={cat}
                onClick={() => setActiveCategory(cat)}
                className={`
-                 text-xs font-bold uppercase px-4 py-2 rounded-md transition-all duration-200 border
+                 text-xs font-bold cursor-pointer uppercase px-4 py-2 rounded-md transition-all duration-200 border
                  ${activeCategory === cat 
                    ? 'bg-neutral-900 text-white border-neutral-900' 
                    : 'bg-white text-neutral-500 border-neutral-200 hover:border-neutral-400 hover:text-neutral-900'}
@@ -163,7 +163,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 
                 {/* Minimal Handle */}
-                <div className="absolute top-0 bottom-0 w-[2px] bg-white z-20" style={{ left: `${sliderPosition}%` }}>
+                <div className="absolute top-0 bottom-0 w-1 bg-white z-20" style={{ left: `${sliderPosition}%` }}>
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
                      <FaArrowsAltH className="text-neutral-900 text-[10px]" />
                   </div>
@@ -177,7 +177,7 @@ const Portfolio: React.FC = () => {
               <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
                 We specialize in high-retention editing. Tight cuts, perfect pacing, and aggressive color grading.
               </p>
-              <button className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs uppercase py-3 rounded transition-colors flex items-center justify-center gap-2">
+              <button className="w-full cursor-pointer bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs uppercase py-3 rounded transition-colors flex items-center justify-center gap-2">
                 Book Edit <FaBolt />
               </button>
            </div>
@@ -188,18 +188,18 @@ const Portfolio: React.FC = () => {
       {/* --- Snappy Video Modal --- */}
       {selectedItem && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedItem(null)}
         >
           <div 
             className={`relative w-full bg-black shadow-2xl overflow-hidden rounded-md animate-in zoom-in-95 duration-200
-              ${selectedItem.aspect === 'vertical' ? 'max-w-sm aspect-[9/16]' : 'max-w-5xl aspect-video'}
+              ${selectedItem.aspect === 'vertical' ? 'max-w-sm aspect-9/16' : 'max-w-5xl aspect-video'}
             `}
             onClick={(e) => e.stopPropagation()}
           >
             <button 
               onClick={() => setSelectedItem(null)}
-              className="absolute top-3 right-3 z-20 text-white/80 hover:text-white bg-black/50 hover:bg-red-600 p-2 rounded-full transition-colors"
+              className="absolute cursor-pointer top-3 right-3 z-20 text-white/80 hover:text-white bg-black/50 hover:bg-red-600 p-2 rounded-full transition-colors"
             >
               <FaTimes />
             </button>

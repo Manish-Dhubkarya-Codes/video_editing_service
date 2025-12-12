@@ -8,7 +8,6 @@
   --accent: #d97706;
   --textLight: #6b7280;
   --neutral: #f3f4f6;
-
   --color-primary: #030712;
   --color-accent: #00f0ff;
   --color-accent-secondary: #7000ff;
@@ -17,7 +16,15 @@
   --font-display: "Orbitron", sans-serif;
   --font-mono: "Share Tech Mono", monospace;
 }
+::selection {
+  background: #36FFFC;   /* Highlight color */
+  color: #000000;        /* Text color on highlight (optional) */
+}
 
+::-moz-selection {
+  background: #36FFFC; 
+  color: #000000;
+}
 /* -------------------------------
       ONLY CUSTOM UTILITIES
    (Do NOT override Tailwind classes)
@@ -26,10 +33,18 @@
 /* Cyber Tool Tag */
 .tool-tag-cyber {
   @apply px-4 py-2 text-sm font-bold tracking-wider rounded-full transition-all;
-  @apply bg-gray-800 text-white border border-gray-700 hover:bg-opacity-50 hover:border-accent hover:text-accent;
-  box-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
-  font-family: var(--font-mono);
+  @apply bg-gray-800 text-white border border-gray-700;
+  @apply hover:bg-gray-800/50;
+
+  /* Replace the failing Tailwind classes with pure CSS */
+  border-color: #00f0ff; /* normal state? optional */
 }
+
+.tool-tag-cyber:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 
 /* 3D helper classes */
 .perspective-1000 {
@@ -44,6 +59,7 @@
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
 }
+
 
 /* -------------------------------
       ANIMATIONS

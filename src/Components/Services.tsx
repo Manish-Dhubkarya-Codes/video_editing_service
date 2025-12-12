@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// --- Icon Components ---
+// --- Icon Components (Unchanged) ---
 const Icons = {
   Youtube: () => (
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
@@ -26,12 +26,9 @@ const Icons = {
   ArrowRight: () => (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
   ),
-  Bolt: () => (
-    <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-  )
 };
 
-// --- Data ---
+// --- Data (Unchanged) ---
 const services = [
   {
     id: 0,
@@ -109,7 +106,7 @@ const Services: React.FC = () => {
   useEffect(() => {
     const triggerFlash = () => {
       setFlash(true);
-      setTimeout(() => setFlash(false), 120); // Quick flash
+      setTimeout(() => setFlash(false), 120); 
       const next = Math.random() * 4000 + 2000; 
       setTimeout(triggerFlash, next);
     };
@@ -118,98 +115,87 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id='services' className="relative w-full h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center">
+    <section id='services' className="relative w-full min-h-screen lg:h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center py-12 lg:py-0">
       
-      {/* --- BACKGROUND ANIMATION LAYER --- */}
+      {/* --- BACKGROUND ANIMATION LAYER (Unchanged) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        
-        {/* Flash Overlay */}
         <div className={`absolute inset-0 bg-blue-100 mix-blend-color-dodge transition-opacity duration-75 ${flash ? 'opacity-40' : 'opacity-0'} z-0`}></div>
-        
-        {/* Physical Lightning Bolt (With Jitter Animation) */}
-        <div className={`absolute top-10 right-[15%] text-yellow-400 transition-all duration-75 ${flash ? 'opacity-100 scale-100 animate-jitter' : 'opacity-0 scale-95'} z-0`}>
-             <Icons.Bolt />
-        </div>
-        
-        {/* Secondary Bolt */}
-        <div className={`absolute top-1/2 left-[5%] text-indigo-400 transition-all duration-75 delay-75 ${flash ? 'opacity-60 scale-75 animate-jitter' : 'opacity-0 scale-50'} z-0`}>
-             <Icons.Bolt />
-        </div>
-
-        {/* Tertiary Bolt for More Lightning Effects */}
-        <div className={`absolute bottom-20 left-[30%] text-blue-300 transition-all duration-75 delay-50 ${flash ? 'opacity-50 scale-110 animate-jitter' : 'opacity-0 scale-90'} z-0 rotate-45`}>
-             <Icons.Bolt />
-        </div>
-
-        {/* Glow Effect for Lightning */}
         <div className={`absolute inset-0 bg-yellow-200 mix-blend-screen transition-opacity duration-150 ${flash ? 'opacity-20' : 'opacity-0'} z-0`}></div>
 
-        {/* MASSIVE SHOOTING STARS ARRAY (Increased Count & Variance) */}
         {[...Array(12)].map((_, i) => (
           <div 
             key={i}
-            className="absolute h-[2px] rounded-full bg-gradient-to-r from-indigo-600 via-blue-400 to-transparent opacity-0 animate-shooting-star"
+            className="absolute h-2 rounded-full bg-linear-to-r from-indigo-600 via-blue-400 to-transparent opacity-0 animate-shooting-star"
             style={{
               top: `${Math.random() * 40}%`,
-              left: `${Math.random() * 60 - 30}%`, // Varied start positions
-              width: `${Math.random() * 60 + 40}px`, // Variable length
-              animationDelay: `${Math.random() * 15}s`, // Spread out over 15s loop
-              animationDuration: `${Math.random() * 1.5 + 2}s` // Variable speed
+              left: `${Math.random() * 60 - 30}%`,
+              width: `${Math.random() * 60 + 40}px`, 
+              animationDelay: `${Math.random() * 15}s`,
+              animationDuration: `${Math.random() * 1.5 + 2}s`
             }}
           />
         ))}
 
-        {/* Ambient Blobs (Smoother Motion) */}
         <div className="absolute top-[-10%] right-[-10%] w-[350px] h-[350px] bg-purple-300/30 rounded-full blur-[80px] animate-blob"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-300/30 rounded-full blur-[80px] animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 h-full flex flex-col justify-center relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 h-full flex flex-col justify-center relative z-10 w-full">
         
         {/* Header */}
-        <div className="mb-8 text-center lg:text-left animate-fade-in-up">
-            <h2 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">
+        <div className="mb-6 lg:mb-8 text-center lg:text-left animate-fade-in-up">
+            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-2">
               SERVICES<span className="text-blue-600">.</span>
             </h2>
-            <p className="text-slate-500 text-sm font-medium tracking-wide">
+            <p className="text-slate-500 text-xs lg:text-sm font-medium tracking-wide">
               CONFIGURE YOUR WORKFLOW
             </p>
         </div>
 
         {/* Main Layout Grid */}
-        <div className="grid lg:grid-cols-12 gap-5 lg:h-[450px]">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-5 w-full">
           
           {/* LEFT: Navigation List */}
-          <div className="lg:col-span-4 flex flex-col gap-2 justify-center">
+          {/* UPDATED: Added items-center for mobile alignment to keep arrow centered with buttons */}
+          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-3 lg:justify-center overflow-x-auto pb-4 lg:pb-0 snap-x hide-scrollbar items-center lg:items-stretch">
+            
+            {/* --- NEW ANIMATED ARROW (Mobile Only) --- */}
+            <div className="lg:hidden flex flex-col items-center justify-center px-2 shrink-0 animate-bounce-horizontal text-blue-500/80">
+                <Icons.ArrowRight />
+                <span className="text-[9px] font-bold tracking-widest mt-1">SWIPE</span>
+            </div>
+
             {services.map((service, idx) => (
               <button
                 key={service.id}
                 onClick={() => setSelectedId(service.id)}
                 className={`
-                  relative p-3 rounded-xl text-left transition-all duration-300 group overflow-hidden border
+                  relative p-3 rounded-xl cursor-pointer text-left transition-all duration-300 group overflow-hidden border snap-center flex-shrink-0
+                  min-w-[260px] lg:min-w-0 w-auto
                   ${selectedId === service.id 
-                    ? 'bg-white border-blue-100 shadow-lg scale-[1.03] z-20 ring-1 ring-blue-50' 
-                    : 'bg-white/40 border-transparent hover:bg-white hover:shadow-md scale-100 text-slate-400 hover:text-slate-600'}
+                    ? 'bg-white border-blue-100 shadow-lg scale-[1.03] z-20 ring-1 ring-blue-200' 
+                    : 'bg-gray-50 border-gray-200 hover:bg-white hover:shadow-md hover:border-gray-300 scale-100 text-slate-600 hover:text-slate-800'}
                 `}
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
-                {/* Active Shimmer Effect */}
+                {/* Active Shimmer */}
                 {selectedId === service.id && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shimmer"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shimmer"></div>
                 )}
                 
                 {/* Bottom Progress Bar */}
-                <div className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-500 ease-out ${selectedId === service.id ? 'w-full' : 'w-0'}`}></div>
+                <div className={`absolute bottom-0 left-0 h-2 bg-linear-to-r from-blue-600 to-purple-600 transition-all duration-500 ease-out ${selectedId === service.id ? 'w-full' : 'w-0'}`}></div>
 
                 <div className="flex items-center justify-between relative z-10">
                   <div className="flex items-center gap-3">
                     <div className={`p-1.5 rounded-lg transition-all duration-300 ${selectedId === service.id ? service.soft + ' ' + service.text + ' rotate-0 scale-110' : 'bg-slate-100 text-slate-400 -rotate-12 scale-100 group-hover:rotate-0'}`}>
                       <service.Icon />
                     </div>
-                    <span className={`font-bold tracking-tight text-base transition-colors ${selectedId === service.id ? 'text-slate-800' : ''}`}>{service.title}</span>
+                    <span className={`font-bold tracking-tight text-sm lg:text-base transition-colors ${selectedId === service.id ? 'text-slate-800' : ''}`}>{service.title}</span>
                   </div>
                   
-                  <div className={`transition-all duration-300 ease-out ${selectedId === service.id ? 'translate-x-0 opacity-100 text-blue-600' : '-translate-x-2 opacity-0'}`}>
+                  {/* Hide arrow on small mobile buttons to save space, show on desktop */}
+                  <div className={`transition-all duration-300 ease-out hidden sm:block ${selectedId === service.id ? 'translate-x-0 opacity-100 text-blue-600' : '-translate-x-2 opacity-0'}`}>
                     <Icons.ArrowRight />
                   </div>
                 </div>
@@ -218,40 +204,37 @@ const Services: React.FC = () => {
           </div>
 
           {/* RIGHT: Detail Card */}
-          <div className="lg:col-span-8 perspective-1000">
+          <div className="lg:col-span-8 perspective-1000 w-full">
              <div 
-                key={active.id}
-                className="w-full h-full bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/60 overflow-hidden flex flex-col md:flex-row animate-spring-flip origin-center relative"
+               key={active.id}
+               className="w-full bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/60 overflow-hidden flex flex-col md:flex-row animate-spring-flip origin-center relative min-h-[400px] md:h-[450px]"
              >
                 {/* IMAGE HALF */}
-                <div className="md:w-5/12 relative overflow-hidden group h-48 md:h-auto">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent z-10"></div>
+                <div className="w-full md:w-5/12 relative overflow-hidden group h-52 md:h-auto shrink-0">
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/40 to-transparent z-10"></div>
                   <img 
                     src={active.img} 
                     alt={active.title}
                     className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-[1.5s] ease-out"
                   />
                   
-                  {/* Play Button (Pulse) */}
                   <div className="absolute inset-0 z-20 flex items-center justify-center">
-                    <button className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50 hover:scale-110 hover:bg-white/30 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-pulse-slow group-hover:animate-none">
+                    <button className="w-12 h-12 md:w-14 md:h-14 cursor-pointer bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50 hover:scale-110 hover:bg-white/30 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] animate-pulse-slow group-hover:animate-none">
                         <Icons.Play />
                     </button>
                   </div>
 
-                  {/* Floating Price Tag */}
                   <div className="absolute top-4 left-4 z-20 animate-float-y">
-                    <span className="bg-white/95 backdrop-blur text-slate-900 font-black text-sm px-3 py-1.5 rounded-lg shadow-lg border border-slate-100">
+                    <span className="bg-white/95 backdrop-blur text-slate-900 font-black text-xs md:text-sm px-3 py-1.5 rounded-lg shadow-lg border border-slate-100">
                         {active.price}
                     </span>
                   </div>
                 </div>
 
                 {/* CONTENT HALF */}
-                <div className="md:w-7/12 p-6 flex flex-col relative justify-center bg-gradient-to-br from-white to-slate-50">
-                   
-                   {/* Giant Background Icon */}
-                   <div className={`absolute -right-6 -bottom-6 w-40 h-40 ${active.text} opacity-[0.04] rotate-12 scale-150 pointer-events-none transition-transform duration-700`}>
+                <div className="w-full md:w-7/12 p-5 md:p-6 flex flex-col relative justify-center bg-linear-to-br from-white to-slate-50">
+                    
+                   <div className={`absolute -right-6 -bottom-6 w-32 h-32 md:w-40 md:h-40 ${active.text} opacity-[0.04] rotate-12 scale-150 pointer-events-none transition-transform duration-700`}>
                       <active.Icon />
                    </div>
 
@@ -260,9 +243,9 @@ const Services: React.FC = () => {
                             {active.category}
                         </div>
                         
-                        <h3 className="text-3xl font-black text-slate-800 mb-2 animate-slide-right-spring delay-75 leading-tight">{active.title}</h3>
+                        <h3 className="text-2xl md:text-3xl font-black text-slate-800 mb-2 animate-slide-right-spring delay-75 leading-tight">{active.title}</h3>
                         
-                        <p className="text-slate-500 text-sm font-medium leading-relaxed mb-5 animate-slide-right-spring delay-100 max-w-sm">
+                        <p className="text-slate-500 text-sm font-medium leading-relaxed mb-5 animate-slide-right-spring delay-100">
                             {active.description}
                         </p>
                         
@@ -270,7 +253,7 @@ const Services: React.FC = () => {
                         <div className="space-y-2 mb-6">
                             {active.deliverables.map((item, i) => (
                                 <div key={i} className="flex items-center animate-slide-up-stagger" style={{ animationDelay: `${150 + (i*50)}ms`}}>
-                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center mr-2 ${active.color} text-white shadow-sm ring-2 ring-white`}>
+                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center mr-2 ${active.color} text-white shadow-sm ring-2 ring-white shrink-0`}>
                                         <Icons.Check />
                                     </div>
                                     <span className="font-semibold text-slate-600 text-xs">{item}</span>
@@ -280,12 +263,12 @@ const Services: React.FC = () => {
 
                       {/* CTA Button */}
                       <button className={`
-                        w-full py-3 rounded-xl font-bold text-sm text-white shadow-lg transition-all duration-300
+                        w-full cursor-pointer py-3 rounded-xl font-bold text-sm text-white shadow-lg transition-all duration-300
                         hover:shadow-xl hover:-translate-y-1 hover:brightness-110 active:scale-[0.98]
                         ${active.color} animate-fade-in delay-300 relative overflow-hidden group/btn
                       `}>
                           <span className="relative z-10">Select Plan</span>
-                          <div className="absolute inset-0 -translate-x-full group-hover/btn:animate-shimmer-fast bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
+                          <div className="absolute inset-0 -translate-x-full group-hover/btn:animate-shimmer-fast bg-linear-to-r from-transparent via-white/20 to-transparent z-0"></div>
                       </button>
                    </div>
                 </div>
@@ -295,11 +278,28 @@ const Services: React.FC = () => {
         </div>
       </div>
 
-      {/* --- REFINED ANIMATIONS --- */}
+      {/* --- ANIMATIONS & UTILS --- */}
       <style>{`
+        /* Utility to hide scrollbar but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         .perspective-1000 { perspective: 1000px; }
         
-        /* 1. Improved Shooting Star (Longer, Faster, Angled) */
+        /* NEW: Horizontal Bounce for the Mobile Arrow */
+        @keyframes bounce-horizontal {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        .animate-bounce-horizontal {
+            animation: bounce-horizontal 1.5s infinite;
+        }
+
         @keyframes shooting-star {
             0% { transform: translateX(0) translateY(0) rotate(15deg); opacity: 0; }
             10% { opacity: 1; }
@@ -307,17 +307,6 @@ const Services: React.FC = () => {
         }
         .animate-shooting-star { animation: shooting-star linear infinite; }
 
-        /* 2. Lightning Jitter */
-        @keyframes jitter {
-            0% { transform: translate(0,0) scale(1); }
-            25% { transform: translate(-2px, 2px) scale(1.1); }
-            50% { transform: translate(2px, -2px) scale(0.9); }
-            75% { transform: translate(-1px, 1px) scale(1.05); }
-            100% { transform: translate(0,0) scale(1); }
-        }
-        .animate-jitter { animation: jitter 0.2s linear; }
-
-        /* 3. Spring Flip Entrance (More realistic card physics) */
         @keyframes spring-flip {
             0% { opacity: 0; transform: rotateY(-15deg) translateX(30px) scale(0.95); }
             60% { opacity: 1; transform: rotateY(2deg) translateX(-5px) scale(1.01); }
@@ -325,7 +314,6 @@ const Services: React.FC = () => {
         }
         .animate-spring-flip { animation: spring-flip 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
-        /* 4. Spring Slide (Smoother text entry) */
         @keyframes slide-right-spring {
             0% { opacity: 0; transform: translateX(-20px); }
             100% { opacity: 1; transform: translateX(0); }
@@ -338,7 +326,6 @@ const Services: React.FC = () => {
         }
         .animate-slide-up-stagger { animation: slide-up-stagger 0.5s ease-out forwards; opacity: 0; }
 
-        /* 5. Shimmer Effects */
         @keyframes shimmer {
             100% { transform: translateX(100%); }
         }
@@ -349,7 +336,6 @@ const Services: React.FC = () => {
         }
         .animate-shimmer-fast { animation: shimmer-fast 0.8s ease-out; }
 
-        /* 6. Background Blobs */
         @keyframes blob {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(40px, -40px) scale(1.1); }
