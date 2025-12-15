@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FaPlay, FaTimes, FaArrowsAltH, FaBolt } from 'react-icons/fa';
 
 // --- Data ---
-const categories = ['All', 'YouTube', 'Reels', 'Ads', 'Wedding'];
-
+// Removed categories array
 const portfolioItems = [
   { 
     id: 2, 
@@ -27,7 +26,7 @@ const portfolioItems = [
     title: 'Italian Summer', 
     thumbnail: 'https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=800', 
     video: 'https://www.w3schools.com/html/mov_bbb.mp4',
-    aspect: 'vertical' // Changed to vertical to show packing
+    aspect: 'vertical'
   },
   { 
     id: 5, 
@@ -56,14 +55,10 @@ const portfolioItems = [
 ];
 
 const Portfolio: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+  // Removed activeCategory state
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [sliderPosition, setSliderPosition] = useState(50);
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  const filteredItems = activeCategory === 'All' 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === activeCategory);
 
   const handleMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (sliderRef.current) {
@@ -78,7 +73,7 @@ const Portfolio: React.FC = () => {
     <section id='portfolio' className="bg-neutral-50 min-h-screen py-20 px-4 md:px-8 font-sans text-neutral-800">
       
       {/* --- Compact Header --- */}
-      <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-neutral-200 pb-6">
+      <div className="max-w-[1600px] mx-auto mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-6">
         <div>
           <h2 className="text-3xl font-black tracking-tighter uppercase mb-1 flex items-center gap-2">
             <FaBolt className="text-yellow-500 text-2xl" /> Work_Gallery
@@ -86,22 +81,9 @@ const Portfolio: React.FC = () => {
           <p className="text-xs font-mono text-neutral-400 uppercase tracking-widest">Speed • Rhythm • Impact</p>
         </div>
 
-        {/* Minimalist Tab Switcher */}
-        <div className="flex flex-wrap gap-2">
-           {categories.map((cat) => (
-             <button
-               key={cat}
-               onClick={() => setActiveCategory(cat)}
-               className={`
-                 text-xs font-bold cursor-pointer uppercase px-4 py-2 rounded-md transition-all duration-200 border
-                 ${activeCategory === cat 
-                   ? 'bg-neutral-900 text-white border-neutral-900' 
-                   : 'bg-white text-neutral-500 border-neutral-200 hover:border-neutral-400 hover:text-neutral-900'}
-               `}
-             >
-               {cat}
-             </button>
-           ))}
+        {/* Removed Tab Switcher, added simple total count */}
+        <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest">
+            Displaying {portfolioItems.length} Projects
         </div>
       </div>
 
@@ -110,7 +92,8 @@ const Portfolio: React.FC = () => {
         {/* --- MAIN GRID (Masonry Style) --- */}
         <div className="lg:col-span-3">
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-            {filteredItems.map((item) => (
+            {/* Mapping directly over portfolioItems now */}
+            {portfolioItems.map((item) => (
               <div 
                 key={item.id}
                 onClick={() => setSelectedItem(item)}
@@ -144,7 +127,7 @@ const Portfolio: React.FC = () => {
 
         {/* --- COMPACT SIDEBAR: Before/After & Stats --- */}
         <div className="lg:col-span-1 flex flex-col gap-4">
-           
+            
            {/* Compact Before/After Module */}
            <div className="bg-white p-1 rounded-lg border border-neutral-200 shadow-sm h-64 relative group overflow-hidden select-none">
               <div 
@@ -165,7 +148,7 @@ const Portfolio: React.FC = () => {
                 {/* Minimal Handle */}
                 <div className="absolute top-0 bottom-0 w-1 bg-white z-20" style={{ left: `${sliderPosition}%` }}>
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
-                     <FaArrowsAltH className="text-neutral-900 text-[10px]" />
+                      <FaArrowsAltH className="text-neutral-900 text-[10px]" />
                   </div>
                 </div>
               </div>

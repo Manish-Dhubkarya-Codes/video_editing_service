@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaPlay, FaArrowRight, FaStar, FaQuoteLeft, FaCheckCircle } from 'react-icons/fa';
+import EditingVideo from "../assets/BackEditingVideo.mp4"
 
 // --- Data: Client Reviews ---
 const REVIEWS = [
@@ -50,7 +51,7 @@ const Hero: React.FC = () => {
           autoPlay muted loop playsInline 
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          <source src={EditingVideo} type="video/mp4" />
         </video>
 
         {/* Gradient Mask: Stronger on mobile for text readability */}
@@ -77,11 +78,36 @@ const Hero: React.FC = () => {
 
           {/* Headline - Scaled for Mobile */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[0.9] tracking-tighter w-full">
-            <span className="block opacity-0 animate-slide-in" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>VISUAL</span>
-            <span className="block text-[35px] sm:text-[65px] lg:text-[70px] xl:text-[100px] text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600 opacity-0 animate-slide-in h-[1.1em] overflow-visible" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-               <DecryptText text="STORYTELLING" delay={500} />
-            </span>
-          </h1>
+  {/* Line 1: VISUAL */}
+  <span 
+    className="block opacity-0 animate-slide-in" 
+    style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
+  >
+    VISUAL
+  </span>
+
+  {/* Line 2: STORYTELLING */}
+  <span 
+    className="block text-[35px] sm:text-[65px] lg:text-[70px] xl:text-[100px] text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 animate-slide-in h-[1.1em] overflow-visible" 
+    style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+  >
+    <DecryptText text="STORYTELLING" delay={500} />
+  </span>
+
+  {/* Line 3: POWERED BY AI (New Addition) */}
+  <span 
+    className="block mt-2 sm:mt-4 text-[24px] sm:text-[45px] lg:text-[50px] xl:text-[70px] font-bold opacity-0 animate-slide-in" 
+    style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+  >
+    <span className="text-slate-400 mr-3 text-[0.6em] align-middle font-medium tracking-normal">
+      WITH
+    </span>
+    {/* Using a tech-focused gradient (Violet to Pink) for the AI text */}
+    <span className="text-transparent satisfy-regular bg-clip-text bg-linear-to-r from-violet-600 to-fuchsia-600">
+      <DecryptText text="AI Intelligence" delay={1200} />
+    </span>
+  </span>
+</h1>
 
           <p className="text-base md:text-xl text-slate-700 lg:text-slate-600 max-w-lg leading-relaxed font-medium opacity-0 animate-slide-in" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             We don't just edit videos; we engineer attention. High-end post-production for brands that demand cinematic excellence.
@@ -95,7 +121,7 @@ const Hero: React.FC = () => {
             >
               <div className="absolute inset-0 w-full h-full bg-linear-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative flex items-center justify-center gap-3">
-                START EDITING <FaArrowRight />
+                Take What’s Yours <FaArrowRight />
               </span>
             </button>
 
@@ -140,7 +166,7 @@ const Hero: React.FC = () => {
                <div className="absolute inset-0 transform rotate-y-[-10deg] rotate-x-[5deg] preserve-3d w-full">
                  
                  {/* Floating Header */}
-                 <div className="absolute -top-12 -right-4 z-30 bg-white shadow-2xl p-4 rounded-xl border-l-4 border-blue-600 animate-bounce-slow">
+                 <div className="absolute  -right-4 z-30 bg-white shadow-2xl p-4 rounded-xl border-l-4 border-blue-600 animate-bounce-slow">
                      <div className="flex items-center gap-3">
                         <div className="flex -space-x-2">
                             {[1,2,3].map(i => <img key={i} src={`https://i.pravatar.cc/150?u=${i+10}`} className="w-8 h-8 rounded-full border-2 border-white" alt="client"/>)}
@@ -153,7 +179,7 @@ const Hero: React.FC = () => {
                  </div>
    
                  <div className="h-full overflow-hidden relative mask-image-linear">
-                   <div className="animate-infinite-scroll space-y-5 pb-10 w-full">
+                   <div className="animate-infinite-scroll space-y-5 w-full">
                      {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((review, idx) => (
                        <div key={`desk-${review.id}-${idx}`} className="bg-white/70 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-white/50 hover:scale-105 transition-transform duration-300 group max-w-sm ml-auto mr-auto">
                          <div className="flex justify-between items-start mb-3">
@@ -187,7 +213,7 @@ const Hero: React.FC = () => {
         className="absolute bottom-4 lg:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 animate-fade-in"
         onClick={() => scrollToSection('about')}
       >
-        <span className="text-[10px] font-bold tracking-[0.3em] text-slate-400 uppercase">Scroll</span>
+        <span className="text-[10px] font-bold tracking-[0.3em] text-[#FFFF00] uppercase">Scroll</span>
         <div className="w-0.5 h-8 lg:h-12 bg-slate-300 relative overflow-hidden rounded-full">
           <div className="absolute top-0 left-0 w-full h-1/2 bg-blue-600 animate-scroll-drop rounded-full"></div>
         </div>

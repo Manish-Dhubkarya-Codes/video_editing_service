@@ -51,7 +51,8 @@ const Navbar: React.FC = () => {
     { id: 'about', label: 'ABOUT' },
     { id: 'services', label: 'SERVICES' },
     { id: 'portfolio', label: 'PORTFOLIO' },
-    { id: 'pricing', label: 'ACCESS' },
+    { id: 'careers', label: 'CAREERS' },
+    // { id: 'pricing', label: 'ACCESS' },
   ];
 
   const scrollToSection = (id: string) => {
@@ -149,10 +150,10 @@ const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="font-sans font-bold text-lg tracking-[0.2em] text-white leading-none drop-shadow-md group-hover:text-[#00E6FF] transition-colors">
-                NEXUS
+                TRENDING
               </span>
               <span className="font-mono text-[10px] text-[#00E6FF] tracking-[0.4em]">
-                SYSTEMS
+                EDIITZ...
               </span>
             </div>
           </div>
@@ -183,7 +184,7 @@ const Navbar: React.FC = () => {
 
                 {/* THE REQUESTED BORDER: Expands width + Glows #00E6FF */}
                 <span 
-                    className="absolute -bottom-0 left-0 h-[2px] w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"
+                    className="absolute -bottom-0 left-0 h-1 w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"
                 ></span>
               </button>
             ))}
@@ -201,7 +202,7 @@ const Navbar: React.FC = () => {
               "
             >
               <div className="relative z-10 flex items-center gap-2 text-[#00E6FF] font-mono text-xs font-bold tracking-widest group-hover:text-white transition-colors">
-                INITIALIZE
+                CONTACT
                 <FaChevronRight size={10} className="group-hover:translate-x-1 transition-transform" />
               </div>
               

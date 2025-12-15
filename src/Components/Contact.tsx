@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { FaWhatsapp, FaEnvelope } from 'react-icons/fa'; // Using specific icons for cleaner look
+import { 
+  FaWhatsapp, 
+  FaEnvelope, 
+  FaInstagram, 
+  FaFacebookF, 
+  FaYoutube, 
+  FaPhoneAlt 
+} from 'react-icons/fa'; 
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -26,20 +33,72 @@ const Contact: React.FC = () => {
     }, 2000);
   };
 
+  // --- Configuration for Contact Buttons ---
+  const contactMethods = [
+    { 
+      id: 1, 
+      icon: FaWhatsapp, 
+      label: 'WhatsApp', 
+      href: 'https://wa.me/1234567890', 
+      color: 'text-green-500', 
+      hoverBorder: 'hover:border-green-400' 
+    },
+    { 
+      id: 2, 
+      icon: FaInstagram, 
+      label: 'Instagram', 
+      href: 'https://instagram.com', 
+      color: 'text-pink-500', 
+      hoverBorder: 'hover:border-pink-400' 
+    },
+    { 
+      id: 3, 
+      icon: FaFacebookF, 
+      label: 'Facebook', 
+      href: 'https://facebook.com', 
+      color: 'text-blue-600', 
+      hoverBorder: 'hover:border-blue-600' 
+    },
+    { 
+      id: 4, 
+      icon: FaYoutube, 
+      label: 'YouTube', 
+      href: 'https://youtube.com', 
+      color: 'text-red-500', 
+      hoverBorder: 'hover:border-red-500' 
+    },
+    { 
+      id: 5, 
+      icon: FaPhoneAlt, 
+      label: 'Call Us', 
+      href: 'tel:+1234567890', 
+      color: 'text-indigo-600', 
+      hoverBorder: 'hover:border-indigo-600' 
+    },
+    { 
+      id: 6, 
+      icon: FaEnvelope, 
+      label: 'Email', 
+      href: 'mailto:info@proedit.com', 
+      color: 'text-blue-400', 
+      hoverBorder: 'hover:border-blue-400' 
+    },
+  ];
+
   return (
     <section id="contact" className="relative py-12 md:py-24 bg-slate-50 font-sans min-h-screen flex items-center">
       
-      {/* Background Blobs (Subtler) */}
+      {/* Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl mix-blend-multiply" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl mix-blend-multiply" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
         
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           
-          {/* --- LEFT COLUMN: Header & Info --- */}
+          {/* --- LEFT COLUMN: Header & Social Grid --- */}
           <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left">
             <div className="mb-8">
                 <span className="inline-block py-1 px-3 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold tracking-wider uppercase mb-3">
@@ -50,20 +109,29 @@ const Contact: React.FC = () => {
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-500">Project together.</span>
                 </h2>
                 <p className="text-slate-500 text-sm md:text-lg max-w-md mx-auto lg:mx-0">
-                  We respond within 24 hours. Skip the form? Reach us directly below.
+                  We respond within 24 hours. Connect with us on your favorite platform below.
                 </p>
             </div>
 
-            {/* Direct Contact Buttons - 2 Column Grid on Mobile */}
-            <div className="grid grid-cols-2 gap-4 mb-8 lg:mb-0">
-               <a href="https://wa.me/1234567890" className="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-green-400 hover:shadow-md transition-all group cursor-pointer">
-                  <FaWhatsapp className="text-3xl text-green-500 mb-2 group-hover:scale-110 transition-transform" />
-                  <span className="font-bold text-slate-800 text-sm">WhatsApp</span>
-               </a>
-               <a href="mailto:info@proedit.com" className="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-blue-400 hover:shadow-md transition-all group cursor-pointer">
-                  <FaEnvelope className="text-3xl text-blue-500 mb-2 group-hover:scale-110 transition-transform" />
-                  <span className="font-bold text-slate-800 text-sm">Email</span>
-               </a>
+            {/* Social Grid - Responsive (2 cols mobile, 3 cols tablet/desktop) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 lg:mb-0">
+               {contactMethods.map((method) => (
+                 <a 
+                   key={method.id}
+                   href={method.href}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className={`
+                     flex flex-col items-center justify-center p-4 
+                     bg-white border border-slate-200 rounded-2xl shadow-sm 
+                     transition-all duration-300 group cursor-pointer
+                     ${method.hoverBorder} hover:shadow-md hover:-translate-y-1
+                   `}
+                 >
+                   <method.icon className={`text-2xl mb-2 transition-transform group-hover:scale-110 ${method.color}`} />
+                   <span className="font-bold text-slate-700 text-xs">{method.label}</span>
+                 </a>
+               ))}
             </div>
           </div>
 
@@ -82,7 +150,7 @@ const Contact: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name & Email - Stack on Mobile, Row on Desktop */}
+                {/* Name & Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Name</label>

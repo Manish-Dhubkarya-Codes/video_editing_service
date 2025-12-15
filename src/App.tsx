@@ -40,9 +40,9 @@ const App: React.FC = () => {
         <Workflow />
       </ScrollReveal>
 
-      <ScrollReveal>
+      {/* <ScrollReveal>
         <Pricing />
-      </ScrollReveal>
+      </ScrollReveal> */}
 
       <ScrollReveal>
         <Testimonials />

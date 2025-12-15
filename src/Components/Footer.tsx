@@ -34,8 +34,8 @@ const Footer: React.FC = () => {
           {/* Column 1: Brand Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-2xl font-bold tracking-tight">
-              <span className="bg-[#00f0ff] text-white px-2 py-1 rounded-lg">Pro</span>
-              <span>Edit Services</span>
+              <span className="bg-[#00f0ff] text-white px-2 py-1 rounded-lg">Trending</span>
+              <span>Ediitz...</span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               We turn raw footage into cinematic masterpieces. Trusted by over 500+ creators and brands worldwide to deliver high-retention video content.

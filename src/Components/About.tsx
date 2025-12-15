@@ -157,7 +157,7 @@ const About: React.FC = () => {
               { name: "After_Effects_VFX", type: "COMP", size: "1.8 GB", color: "text-indigo-400", icon: "Ae" },
               { name: "DaVinci_Resolve", type: "APP", size: "4.1 GB", color: "text-pink-400", icon: "Da" },
               { name: "Photoshop_Assets", type: "PSD", size: "500 MB", color: "text-blue-400", icon: "Ps" },
-              { name: "Blender_3D_Models", type: "BLEND", size: "8.2 GB", color: "text-orange-400", icon: "Bl" },
+              { name: "Voice_Over_Editing_&REC.", type: "VOI", size: "8.2 GB", color: "text-orange-400", icon: "Vo" },
               { name: "Sound_Design_SFX", type: "WAV", size: "12 GB", color: "text-emerald-400", icon: "Au" },
             ].map((item, i) => (
               <div key={i} className="grid grid-cols-3 md:grid-cols-4 items-center px-2 py-2 hover:bg-slate-700/50 rounded cursor-pointer group transition-colors border border-transparent hover:border-slate-600/50">
