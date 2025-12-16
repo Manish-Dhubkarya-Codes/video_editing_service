@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 
 // --- Configuration ---
-const PHONE_NUMBER = "919876543210"; 
+const PHONE_NUMBER = "918224889744"; 
 
 // --- Data: Open Positions ---
 const positions = [
@@ -82,7 +82,7 @@ const Careers: React.FC = () => {
               className="min-w-[85vw] md:min-w-0 snap-center bg-white rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 group flex flex-col h-full relative overflow-hidden"
             >
               {/* Top Decor Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
 
               {/* Icon & Title */}
               <div className="flex items-start justify-between mb-6">
@@ -97,7 +97,7 @@ const Careers: React.FC = () => {
               <h3 className="text-2xl font-bold text-slate-900 mb-2">{job.title}</h3>
               <p className="text-blue-600 text-sm font-bold mb-6">{job.salary}</p>
               
-              <p className="text-slate-600 leading-relaxed mb-6 text-sm flex-grow">
+              <p className="text-slate-600 leading-relaxed mb-6 text-sm flex flex-col">
                 {job.description}
               </p>
 

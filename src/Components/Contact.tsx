@@ -5,41 +5,31 @@ import {
   FaInstagram, 
   FaFacebookF, 
   FaYoutube, 
-  FaPhoneAlt 
+  FaPhoneAlt,
+  FaPaperPlane,
+  FaCopy,
+  FaTimes
 } from 'react-icons/fa'; 
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', 
     project: '',
-    budget: '',
-    link: '',
     message: ''
   });
 
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [showModal, setShowModal] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-    setTimeout(() => {
-      console.log(formData);
-      setStatus('success');
-    }, 2000);
-  };
-
-  // --- Configuration for Contact Buttons ---
+  // --- 1. UPDATED SOCIAL LINKS ---
   const contactMethods = [
     { 
       id: 1, 
       icon: FaWhatsapp, 
       label: 'WhatsApp', 
-      href: 'https://wa.me/1234567890', 
+      href: 'https://wa.me/918224889744', 
       color: 'text-green-500', 
       hoverBorder: 'hover:border-green-400' 
     },
@@ -47,7 +37,7 @@ const Contact: React.FC = () => {
       id: 2, 
       icon: FaInstagram, 
       label: 'Instagram', 
-      href: 'https://instagram.com', 
+      href: 'https://www.instagram.com/trendingediitz?igsh=MW9ldXljd25qYThmZA==', 
       color: 'text-pink-500', 
       hoverBorder: 'hover:border-pink-400' 
     },
@@ -55,7 +45,7 @@ const Contact: React.FC = () => {
       id: 3, 
       icon: FaFacebookF, 
       label: 'Facebook', 
-      href: 'https://facebook.com', 
+      href: 'https://www.facebook.com/share/1K5m4RRo9c/', 
       color: 'text-blue-600', 
       hoverBorder: 'hover:border-blue-600' 
     },
@@ -63,7 +53,7 @@ const Contact: React.FC = () => {
       id: 4, 
       icon: FaYoutube, 
       label: 'YouTube', 
-      href: 'https://youtube.com', 
+      href: 'https://www.youtube.com/@trendingediitz', 
       color: 'text-red-500', 
       hoverBorder: 'hover:border-red-500' 
     },
@@ -71,7 +61,7 @@ const Contact: React.FC = () => {
       id: 5, 
       icon: FaPhoneAlt, 
       label: 'Call Us', 
-      href: 'tel:+1234567890', 
+      href: 'tel:+918224889744', 
       color: 'text-indigo-600', 
       hoverBorder: 'hover:border-indigo-600' 
     },
@@ -79,14 +69,82 @@ const Contact: React.FC = () => {
       id: 6, 
       icon: FaEnvelope, 
       label: 'Email', 
-      href: 'mailto:info@proedit.com', 
+      href: 'mailto:info@ediitz.com', 
       color: 'text-blue-400', 
       hoverBorder: 'hover:border-blue-400' 
     },
   ];
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // --- GENERATE MESSAGE STRING ---
+  const getFormattedMessage = () => {
+    return `*New Project Request*\n\n` +
+           `*Name:* ${formData.name}\n` +
+           `*Email:* ${formData.email}\n` +
+           `*Phone:* ${formData.phone}\n` +
+           `*Service:* ${formData.project}\n` +
+           `*Details:* ${formData.message}`;
+  };
+
+  // --- OPEN MODAL INSTEAD OF FAKE SUBMIT ---
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(formData.name && formData.phone) {
+      setShowModal(true);
+    }
+  };
+
+  // --- HANDLE PLATFORM REDIRECT ---
+  const handleSendToPlatform = (platform: 'whatsapp' | 'instagram' | 'facebook' | 'email') => {
+    const message = getFormattedMessage();
+    const encodedMessage = encodeURIComponent(message);
+    
+    let url = '';
+
+    switch (platform) {
+      case 'whatsapp':
+        // WhatsApp API supports pre-filled text
+        url = `https://wa.me/918224889744?text=${encodedMessage}`;
+        window.open(url, '_blank');
+        break;
+
+      case 'email':
+         // Mailto supports body text
+        url = `mailto:info@ediitz.com?subject=New Project Request from ${formData.name}&body=${encodedMessage}`;
+        window.open(url, '_blank');
+        break;
+
+      case 'instagram':
+        // Instagram does NOT support URL text pre-fill. We copy to clipboard first.
+        navigator.clipboard.writeText(message);
+        setCopyStatus('Message Copied! Pasting in Instagram...');
+        setTimeout(() => {
+          window.open('https://www.instagram.com/trendingediitz?igsh=MW9ldXljd25qYThmZA==', '_blank');
+          setShowModal(false);
+          setCopyStatus('');
+        }, 1500);
+        return; 
+
+      case 'facebook':
+        // Facebook does NOT support URL text pre-fill. We copy to clipboard first.
+        navigator.clipboard.writeText(message);
+        setCopyStatus('Message Copied! Opening Facebook...');
+        setTimeout(() => {
+           window.open('https://www.facebook.com/share/1K5m4RRo9c/', '_blank');
+           setShowModal(false);
+           setCopyStatus('');
+        }, 1500);
+        return;
+    }
+    
+    setShowModal(false);
+  };
+
   return (
-    <section id="contact" className="relative py-12 md:py-24 bg-slate-50 font-sans min-h-screen flex items-center">
+    <section id="contact" className="relative py-12 md:py-24 bg-slate-50 font-sans flex items-center">
       
       {/* Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -109,11 +167,11 @@ const Contact: React.FC = () => {
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-500">Project together.</span>
                 </h2>
                 <p className="text-slate-500 text-sm md:text-lg max-w-md mx-auto lg:mx-0">
-                  We respond within 24 hours. Connect with us on your favorite platform below.
+                  Fill out the form to generate your inquiry, then choose your preferred platform to send it.
                 </p>
             </div>
 
-            {/* Social Grid - Responsive (2 cols mobile, 3 cols tablet/desktop) */}
+            {/* Social Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 lg:mb-0">
                {contactMethods.map((method) => (
                  <a 
@@ -139,64 +197,53 @@ const Contact: React.FC = () => {
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 md:p-10 relative overflow-hidden">
               
-              {/* Success State */}
-              {status === 'success' && (
-                <div className="absolute inset-0 bg-white z-20 flex flex-col items-center justify-center text-center p-6 animate-fade-in">
-                   <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 text-2xl">✓</div>
-                   <h3 className="text-2xl font-bold text-slate-900">Message Sent!</h3>
-                   <p className="text-slate-500 mt-2 mb-6">We'll be in touch shortly.</p>
-                   <button onClick={() => setStatus('idle')} className="text-indigo-600 font-bold hover:underline">Send another</button>
-                </div>
-              )}
-
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name & Email */}
+                {/* Name & Service */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Name</label>
-                    <input type="text" name="name" onChange={handleChange} required placeholder="John Doe" className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" />
+                    <input type="text" name="name" onChange={handleChange} required placeholder="Your Name" className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Email</label>
-                    <input type="email" name="email" onChange={handleChange} required placeholder="john@example.com" className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" />
-                  </div>
-                </div>
-
-                {/* Dropdowns */}
-                <div className="grid grid-cols-2 gap-4">
-                   <div>
                       <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Service</label>
                       <select name="project" onChange={handleChange} required className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none appearance-none">
                         <option value="">Select...</option>
-                        <option value="YouTube">YouTube</option>
-                        <option value="Shorts">Shorts/Reels</option>
-                        <option value="Corporate">Corporate</option>
+                        <option value="YouTube Editing">YouTube Editing</option>
+                        <option value="Reels/Shorts">Reels/Shorts</option>
+                        <option value="Corporate">Corporate Video</option>
+                        <option value="Other">Other</option>
                       </select>
+                   </div>
+                </div>
+
+                {/* Phone & Email */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        name="phone" 
+                        onChange={handleChange} 
+                        required
+                        placeholder="+91 00000 00000" 
+                        className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" 
+                      />
                    </div>
                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Budget</label>
-                      <select name="budget" onChange={handleChange} required className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none appearance-none">
-                        <option value="">Range...</option>
-                        <option value="Low">&lt; $500</option>
-                        <option value="Mid">$500 - $2k</option>
-                        <option value="High">$2k+</option>
-                      </select>
-                   </div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Email</label>
+                    <input type="email" name="email" onChange={handleChange} required placeholder="you@example.com" className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all" />
+                  </div>
                 </div>
 
                 {/* Message */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1 ml-1">Project Details</label>
-                  <textarea name="message" rows={3} onChange={handleChange} placeholder="Tell us about your goals..." className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none resize-none"></textarea>
+                  <textarea name="message" rows={3} onChange={handleChange} placeholder="Tell us about your vision..." className="w-full p-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none resize-none"></textarea>
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit" disabled={status === 'submitting'} className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-indigo-600 transition-colors shadow-lg active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2">
-                   {status === 'submitting' ? (
-                     <span className="animate-pulse">Sending...</span>
-                   ) : (
-                     <>Send Request <span className="text-xl">→</span></>
-                   )}
+                <button type="submit" className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-indigo-600 transition-colors shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
+                   Generate Request <span className="text-xl">→</span>
                 </button>
               </form>
             </div>
@@ -204,10 +251,78 @@ const Contact: React.FC = () => {
 
         </div>
       </div>
+
+      {/* --- PLATFORM SELECTION MODAL --- */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden relative border border-slate-100">
+            
+            {/* Modal Header */}
+            <div className="bg-slate-50 p-4 border-b border-slate-100 flex justify-between items-center">
+              <h3 className="font-bold text-slate-800">Send Request via...</h3>
+              <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-600">
+                <FaTimes />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 space-y-3">
+              {copyStatus ? (
+                <div className="flex flex-col items-center justify-center py-8 text-center animate-pulse">
+                  <FaCopy className="text-4xl text-green-500 mb-2"/>
+                  <p className="font-bold text-slate-700">{copyStatus}</p>
+                </div>
+              ) : (
+                <>
+                  <p className="text-xs text-slate-500 mb-4 text-center">
+                    Your message is ready! Choose a platform to send it.
+                  </p>
+                  
+                  {/* WhatsApp Button */}
+                  <button 
+                    onClick={() => handleSendToPlatform('whatsapp')}
+                    className="w-full flex items-center justify-between p-4 rounded-xl bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/20 hover:bg-[#25D366] hover:text-white transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FaWhatsapp className="text-xl" />
+                      <span className="font-bold">WhatsApp</span>
+                    </div>
+                    <FaPaperPlane className="text-sm opacity-50 group-hover:opacity-100" />
+                  </button>
+
+                  {/* Instagram Button */}
+                  <button 
+                    onClick={() => handleSendToPlatform('instagram')}
+                    className="w-full flex items-center justify-between p-4 rounded-xl bg-pink-50 text-pink-600 border border-pink-100 hover:bg-pink-600 hover:text-white transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FaInstagram className="text-xl" />
+                      <span className="font-bold">Instagram</span>
+                    </div>
+                    <span className="text-[10px] font-mono opacity-70 group-hover:text-white">(Auto-Copy & Open)</span>
+                  </button>
+
+                  {/* Facebook Button */}
+                  <button 
+                    onClick={() => handleSendToPlatform('facebook')}
+                    className="w-full flex items-center justify-between p-4 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-600 hover:text-white transition-all group"
+                  >
+                     <div className="flex items-center gap-3">
+                      <FaFacebookF className="text-xl" />
+                      <span className="font-bold">Facebook</span>
+                    </div>
+                    <span className="text-[10px] font-mono opacity-70 group-hover:text-white">(Auto-Copy & Open)</span>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
       
       <style>{`
-        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; scale: 0.95; } to { opacity: 1; scale: 1; } }
       `}</style>
     </section>
   );

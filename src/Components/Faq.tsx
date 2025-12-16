@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
-import { FaPlus, FaMinus, FaHeadset, FaEnvelope } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaHeadset, FaWhatsapp } from 'react-icons/fa';
 
 const faqs = [
   { 
-    question: 'What file formats do you accept?', 
-    answer: 'We accept almost any video format including MP4, MOV, AVI, WMV, and PRORES. For the best results, we recommend sending the highest resolution source files you have available (1080p or 4K).' 
+    question: 'What types of videos do you edit?', 
+    answer: 'We specialize in a wide range of formats including YouTube Vlogs, Instagram Reels/TikToks, Corporate Interviews, Real Estate tours, and Podcast post-production. Whether it is vertical short-form or long-form narrative, we can handle it.' 
   },
   { 
-    question: 'How long does the editing process take?', 
-    answer: 'Our standard turnaround time is 24-48 hours for most projects. For complex edits or longer content (over 30 mins), it may take 3-5 days. If you are in a rush, we offer a "Priority 12-Hour" add-on at checkout.' 
+    question: 'How do I send my raw footage to you?', 
+    answer: 'We use a streamlined cloud workflow. Once we start, we will provide a Google Drive or Dropbox folder for you to upload your raw files. We also accept links from WeTransfer, Frame.io, or any cloud storage you prefer.' 
   },
   { 
-    question: 'What is included in a "Revision"?', 
-    answer: 'A revision covers changes to cuts, text overlays, music choice, and sound mixing. It does not cover completely restarting the project with new footage or changing the original script/direction provided.' 
+    question: 'Do you provide the stock footage and music?', 
+    answer: 'Yes! We have subscriptions to premium stock libraries (like Artlist, Epidemic Sound, and Storyblocks). We will select royalty-free music and high-quality stock b-roll that fits your video’s mood perfectly, ensuring no copyright strikes.' 
   },
   { 
-    question: 'Do you sign Non-Disclosure Agreements (NDAs)?', 
-    answer: 'Yes, absolutely. We work with high-profile clients and corporate brands where privacy is paramount. We are happy to sign your NDA before receiving any footage.' 
+    question: 'What software do you use for editing?', 
+    answer: 'Our team works primarily in Adobe Premiere Pro and After Effects for complex motion graphics. For color grading, we utilize DaVinci Resolve. We ensure industry-standard project files and 4K export quality.' 
   },
   { 
-    question: 'How do I transfer large video files to you?', 
-    answer: 'Once you book a service, you will receive a secure upload link to our dedicated Google Drive / Dropbox server. You can also send us Frame.io links or WeTransfer links if you prefer.' 
+    question: 'What if I need revisions on the edit?', 
+    answer: 'Your satisfaction is our priority. We include up to 2 rounds of revisions in our standard workflow. This covers changes to pacing, music, text overlays, and sound mixing. Major structural changes or new footage additions may require a separate fee.' 
+  },
+  // --- Payment & Money specific FAQ as requested ---
+  { 
+    question: 'What are your rates and payment terms?', 
+    answer: 'Every project is unique, and we tailor our pricing to match your specific needs and volume. For custom quotes, billing inquiries, and payment arrangements, please contact us directly via WhatsApp or Call us at +1 (555) 123-4567.' 
   },
 ];
 
@@ -38,7 +43,7 @@ const FAQ: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-10 md:mb-16">
           <span className="text-accent font-bold tracking-wider uppercase text-xs md:text-sm">Common Questions</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mt-3">Everything you need to know</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mt-3">Production & Editing Queries</h2>
         </div>
 
         {/* Accordion Container */}
@@ -96,18 +101,20 @@ const FAQ: React.FC = () => {
               <FaHeadset size={20} className="md:w-6 md:h-6" />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-primary">Still have questions?</h4>
+              <h4 className="text-lg font-bold text-primary">Need a custom quote?</h4>
               <p className="text-textLight text-sm mt-1 md:mt-0">
-                Can't find the answer you're looking for? Please chat to our friendly team.
+                For budget discussions and payment details, chat with our team.
               </p>
             </div>
           </div>
 
           <a 
-            href="#contact" 
-            className="w-full md:w-auto flex items-center justify-center gap-2 bg-[#202020] text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent transition-colors whitespace-nowrap text-sm md:text-base cursor-pointer"
+            href="https://wa.me/918224889744" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full md:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#128C7E] transition-colors whitespace-nowrap text-sm md:text-base cursor-pointer shadow-lg"
           >
-            <FaEnvelope /> Get in Touch
+            <FaWhatsapp size={20} /> Chat on WhatsApp
           </a>
         </div>
 

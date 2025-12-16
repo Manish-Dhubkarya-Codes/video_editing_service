@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaPlay, FaArrowRight, FaStar, FaQuoteLeft, FaCheckCircle } from 'react-icons/fa';
-import EditingVideo from "../assets/BackEditingVideo.mp4"
+import EditingVideo from "../assets/Back.mp4"
 
 // --- Data: Client Reviews ---
 const REVIEWS = [
@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
           {/* Action Buttons - Stacked on Mobile, Row on Desktop */}
           <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto opacity-0 animate-slide-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
             <button 
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection('services')}
               className="group cursor-pointer relative px-8 py-4 bg-slate-900 text-white font-bold rounded-lg overflow-hidden shadow-xl transition-all hover:scale-105 hover:shadow-2xl w-full sm:w-auto justify-center"
             >
               <div className="absolute inset-0 w-full h-full bg-linear-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

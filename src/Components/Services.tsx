@@ -153,7 +153,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id='services' className="relative w-full min-h-screen lg:h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center py-12 lg:py-0">
+    <section id='services' className="relative w-full  lg:h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center py-12 lg:py-0">
       
       {/* --- BACKGROUND ANIMATION LAYER --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

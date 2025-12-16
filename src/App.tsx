@@ -4,7 +4,6 @@ import Hero from './Components/Hero';
 import About from './Components/About';
 import Services from './Components/Services';
 import Portfolio from './Components/Portfolio';
-import Pricing from './Components/Pricing';
 import Workflow from './Components/WorkFlow';
 import Testimonials from './Components/Testimonials';
 import Contact from './Components/Contact';
