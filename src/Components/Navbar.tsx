@@ -143,7 +143,7 @@ const Navbar: React.FC = () => {
             className="flex items-center gap-3 cursor-pointer group pl-2"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="relative md:w-15 md:h-15 w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border border-[#00E6FF]/30 rounded-sm group-hover:border-[#00E6FF] transition-colors duration-300">
+            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border border-[#00E6FF]/30 rounded-sm group-hover:border-[#00E6FF] transition-colors duration-300">
               <img src={CompanyLogo}/>
               <div className="absolute inset-0 bg-[#00E6FF] opacity-0 group-hover:opacity-10 transition-opacity"></div>
             </div>
