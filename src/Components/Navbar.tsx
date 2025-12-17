@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { FaBars, FaTimes, FaChevronRight } from 'react-icons/fa';
-import CompanyLogo from "../assets/Company_Logo.png"
+import CompanyLogo from "../assets/Company_Logo.png";
 
 // --- Utility: Scramble Text ---
 const ScrambleText = ({ text, className }: { text: string; className?: string }) => {
@@ -36,15 +36,22 @@ const ScrambleText = ({ text, className }: { text: string; className?: string })
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Use a Ref to track state changes instantly without waiting for re-renders
+  const isScrolledRef = useRef(false);
+  
   const { scrollY } = useScroll();
 
-  // Scroll Logic
+  // Optimized Scroll Logic
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() || 0;
-    if (latest > 50 && latest > previous) {
-      setIsScrolled(true);
-    } else if (latest < 50) {
-      setIsScrolled(false);
+    // Calculate the desired state based on scroll position
+    const shouldBeScrolled = latest > 50;
+
+    // PERFORMANCE FIX: Only trigger a state update if the value ACTUALLY changes.
+    // This prevents React from re-rendering 60fps while you are scrolling.
+    if (isScrolledRef.current !== shouldBeScrolled) {
+      isScrolledRef.current = shouldBeScrolled;
+      setIsScrolled(shouldBeScrolled);
     }
   });
 
@@ -55,7 +62,6 @@ const Navbar: React.FC = () => {
     { id: 'careers', label: 'CAREERS' },
   ];
 
-  // Mobile/Side Nav Links (Includes Contact)
   const mobileLinks = [
     ...navLinks, 
     { id: 'contact', label: 'CONTACT' }
@@ -66,7 +72,6 @@ const Navbar: React.FC = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Animation Variants
   const menuVariants = {
     closed: { opacity: 0, x: "100%" },
     open: { opacity: 1, x: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
@@ -76,10 +81,11 @@ const Navbar: React.FC = () => {
     closed: { opacity: 0, x: 50 },
     open: { opacity: 1, x: 0 }
   };
-useEffect(() => {
-  document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-  document.body.style.touchAction = isMenuOpen ? 'none' : '';
-}, [isMenuOpen]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    document.body.style.touchAction = isMenuOpen ? 'none' : '';
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -92,7 +98,6 @@ useEffect(() => {
             exit="closed"
             variants={menuVariants}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            // CHANGED: md:hidden to lg:hidden (Visible on mobile AND tablet now)
             className="fixed inset-0 z-50 bg-[#020617] lg:hidden flex flex-col items-center justify-center border-l border-[#00E6FF]/30"
           >
             {/* Cyber Grid Background */}
@@ -130,13 +135,18 @@ useEffect(() => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`fixed left-0 right-0 z-40 flex justify-center transition-all duration-500 ${
+        className={`fixed left-0 right-0 z-40 flex justify-center transition-all duration-300 ${
           isScrolled ? 'pt-4' : 'pt-0'
         }`}
       >
         <div 
+          // PERFORMANCE FIX: 
+          // 1. Removed 'transition-all' which causes browser layout thrashing.
+          // 2. Added specific transitions for width, background, and radius.
+          // 3. Reduced duration to 300ms for a snappier feel.
           className={`
-            relative flex items-center justify-between px-6 transition-all duration-500 ease-out
+            relative flex items-center justify-between px-6 
+            transition-[width,background-color,border-radius,box-shadow,height] duration-300 ease-out will-change-[width,background-color]
             ${isScrolled 
               ? 'w-[95%] md:w-[85%] lg:w-[75%] h-16 bg-[#030813]/80 backdrop-blur-xl rounded-full border border-[#00E6FF]/30 shadow-[0_0_20px_rgba(0,230,255,0.15)]' 
               : 'w-full h-24 bg-gradient-to-b from-[#020617] via-[#020617]/80 to-transparent'
@@ -167,7 +177,7 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* Desktop Links - CHANGED: hidden md:flex to hidden lg:flex */}
+          {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link, idx) => (
               <button
@@ -192,7 +202,7 @@ useEffect(() => {
             ))}
           </div>
 
-          {/* CTA Button - CHANGED: hidden md:flex to hidden lg:flex */}
+          {/* CTA Button */}
           <div className="hidden lg:flex pr-2">
             <button
               onClick={() => scrollToSection('contact')}
@@ -213,7 +223,7 @@ useEffect(() => {
             </button>
           </div>
 
-          {/* Mobile/Tablet Toggle - CHANGED: md:hidden to lg:hidden */}
+          {/* Mobile/Tablet Toggle */}
           <button 
             className="lg:hidden cursor-pointer text-white p-2 hover:text-[#00E6FF] transition-colors bg-white/5 rounded-md border border-white/10 hover:border-[#00E6FF]/50"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
