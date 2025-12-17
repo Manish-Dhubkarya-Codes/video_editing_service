@@ -38,11 +38,11 @@ const services = [
     title: 'Wedding Film',
     description: 'Cinematic storytelling capturing your most precious moments.',
     subCategories: [
-      { name: 'Highlights', detail: '3-5 min cinematic summary of best moments.' },
-      { name: 'Pre-Wedding', detail: 'Romantic couple shoot prior to the big day.' },
-      { name: 'Teaser', detail: '1 min high-energy trailer for social sharing.' },
-      { name: 'Trailer', detail: 'Extended cinematic experience of the event.' },
-      { name: 'Wedding Invitation', detail: 'Digital video invites to impress guests.' }
+      { name: 'Highlights', detail: '3-5 min cinematic summary.' },
+      { name: 'Pre-Wedding', detail: 'Romantic couple shoot.' },
+      { name: 'Teaser', detail: '1 min high-energy trailer.' },
+      { name: 'Trailer', detail: 'Extended cinematic experience.' },
+      { name: 'Invites', detail: 'Digital video invites.' }
     ],
     img: 'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Heart,
@@ -56,9 +56,9 @@ const services = [
     title: 'Social Media',
     description: 'High-engagement short form content for growth.',
     subCategories: [
-      { name: 'Insta/FB Reels', detail: 'Trend-focused editing with viral hooks.' },
-      { name: 'Ads Videos', detail: 'High-conversion visuals for paid campaigns.' },
-      { name: 'Vlogs', detail: 'Personal brand building through daily stories.' }
+      { name: 'Insta/FB Reels', detail: 'Trend-focused editing.' },
+      { name: 'Ads Videos', detail: 'High-conversion visuals.' },
+      { name: 'Vlogs', detail: 'Daily story building.' }
     ],
     img: 'https://images.pexels.com/photos/5053835/pexels-photo-5053835.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Smartphone,
@@ -72,13 +72,12 @@ const services = [
     title: 'YouTube',
     description: 'Long form content production and channel management.',
     subCategories: [
-      { name: 'Educational', detail: 'Clear visuals for complex topic explanation.' },
-      { name: 'Tutorial', detail: 'Step-by-step guides with zoom & pan effects.' },
-      { name: 'Podcast', detail: 'Multi-cam syncing and audio noise reduction.' },
-      { name: 'Documentaries', detail: 'Narrative-driven storytelling edits.' },
-      { name: 'Vlogs', detail: 'Engaging cuts to maintain viewer retention.' },
-      { name: 'Funny Videos', detail: 'Comedic timing and sound effect integration.' },
-      { name: 'Shorts', detail: 'Vertical repurposing of long-form content.' }
+      { name: 'Educational', detail: 'Clear visual explanations.' },
+      { name: 'Tutorial', detail: 'Step-by-step guides.' },
+      { name: 'Podcast', detail: 'Multi-cam syncing.' },
+      { name: 'Docs', detail: 'Narrative storytelling.' },
+      { name: 'Vlogs', detail: 'Engaging cuts.' },
+      { name: 'Shorts', detail: 'Vertical repurposing.' }
     ],
     img: 'https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Youtube,
@@ -92,9 +91,9 @@ const services = [
     title: 'Events',
     description: 'Professional coverage for corporate and casual events.',
     subCategories: [
-      { name: 'Highlights', detail: 'Recap of key speakers and event energy.' },
-      { name: 'Reels', detail: 'Fast-paced event snippets for Instagram.' },
-      { name: 'Journey', detail: 'Timeline videos showcasing company growth.' }
+      { name: 'Highlights', detail: 'Recap of key speakers.' },
+      { name: 'Reels', detail: 'Fast-paced snippets.' },
+      { name: 'Journey', detail: 'Timeline showcase.' }
     ],
     img: 'https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Calendar,
@@ -108,9 +107,9 @@ const services = [
     title: 'Audio Editing',
     description: 'Crystal clear sound engineering and post-production.',
     subCategories: [
-      { name: 'Voice Over', detail: 'Recording and cleaning vocal tracks.' },
-      { name: 'Mixing', detail: 'Balancing levels for professional output.' },
-      { name: 'Mastering', detail: 'Final polish for broadcast standards.' }
+      { name: 'Voice Over', detail: 'Recording and cleaning.' },
+      { name: 'Mixing', detail: 'Balancing levels.' },
+      { name: 'Mastering', detail: 'Final polish.' }
     ],
     img: 'https://images.pexels.com/photos/63703/pexels-photo-63703.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Mic,
@@ -124,8 +123,8 @@ const services = [
     title: 'Photo Editing',
     description: 'High-end retouching and color grading services.',
     subCategories: [
-      { name: 'Wedding Photos', detail: 'Color correction and emotional grading.' },
-      { name: 'Pre-Wedding', detail: 'Skin retouching and background cleanup.' }
+      { name: 'Wedding', detail: 'Color correction.' },
+      { name: 'Retouching', detail: 'Skin cleanup.' }
     ],
     img: 'https://images.pexels.com/photos/821652/pexels-photo-821652.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     Icon: Icons.Camera,
@@ -153,7 +152,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id='services' className="relative w-full  lg:h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center py-12 lg:py-0">
+    <section id='services' className="relative w-full min-h-screen lg:min-h-[700px] bg-slate-50 overflow-hidden font-sans text-slate-800 flex items-center py-8 lg:py-0">
       
       {/* --- BACKGROUND ANIMATION LAYER --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -178,10 +177,10 @@ const Services: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-300/30 rounded-full blur-[80px] animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6 h-full flex flex-col justify-center relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 h-full flex flex-col justify-center relative z-10 w-full">
         
         {/* Header */}
-        <div className="mb-6 lg:mb-8 text-center lg:text-left animate-fade-in-up">
+        <div className="mb-6 lg:mb-10 text-center lg:text-left animate-fade-in-up">
             <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-2">
               SERVICES<span className="text-blue-600">.</span>
             </h2>
@@ -191,11 +190,12 @@ const Services: React.FC = () => {
         </div>
 
         {/* Main Layout Grid */}
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-5 w-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 w-full">
           
-          {/* LEFT: Navigation List */}
-          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-3 lg:justify-center overflow-x-auto p-4  lg:pb-0 snap-x hide-scrollbar items-center lg:items-stretch">
+          {/* LEFT: Navigation List (Carousel on Mobile) */}
+          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-visible p-2 lg:pb-0 snap-x hide-scrollbar items-center lg:items-stretch lg:justify-center">
             
+            {/* Mobile Swipe Hint */}
             <div className="lg:hidden flex flex-col items-center justify-center px-2 shrink-0 animate-bounce-horizontal text-blue-500/80">
                 <Icons.ArrowRight />
                 <span className="text-[9px] font-bold tracking-widest mt-1">SWIPE</span>
@@ -206,20 +206,20 @@ const Services: React.FC = () => {
                 key={service.id}
                 onClick={() => setSelectedId(service.id)}
                 className={`
-                  relative p-3 rounded-xl cursor-pointer text-left transition-transform duration-300 ease-out group overflow-hidden border snap-center shrink-0
-                  min-w-[210px] lg:min-w-0 lg:w-full
+                  relative p-3 lg:p-4 rounded-xl cursor-pointer text-left transition-transform duration-300 ease-out group overflow-hidden border snap-start shrink-0
+                  min-w-[150px] lg:min-w-0 lg:w-full
                   ${selectedId === service.id 
                     ? `bg-white shadow-lg scale-[1.03] z-20 ring-1 ${service.border}` 
-                    : 'bg-gray-50 border-gray-200 hover:bg-white hover:shadow-md hover:border-gray-300 scale-100 text-slate-600 hover:text-slate-800'}
+                    : 'bg-white/60 border-gray-200 hover:bg-white hover:shadow-md hover:border-gray-300 scale-100 text-slate-600 hover:text-slate-800'}
                 `}
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
                 {selectedId === service.id && (
-                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shimmer"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 animate-shimmer"></div>
                 )}
                 
-                <div className={`absolute bottom-0 left-0 h-1.5 bg-linear-to-r from-slate-200 to-slate-400 transition-all duration-500 ease-out ${selectedId === service.id ? 'w-full opacity-100' : 'w-0 opacity-0'}`}>
-                    <div className={`h-full w-full ${service.color.replace('bg-', 'bg-linear-to-r from-white/20 to-')}`}></div>
+                <div className={`absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-slate-200 to-slate-400 transition-all duration-500 ease-out ${selectedId === service.id ? 'w-full opacity-100' : 'w-0 opacity-0'}`}>
+                    <div className={`h-full w-full ${service.color.replace('bg-', 'bg-gradient-to-r from-white/20 to-')}`}></div>
                 </div>
 
                 <div className="flex items-center justify-between relative z-10">
@@ -227,7 +227,7 @@ const Services: React.FC = () => {
                     <div className={`p-1.5 rounded-lg transition-transform duration-300 ${selectedId === service.id ? service.soft + ' ' + service.text + ' rotate-0 scale-110' : 'bg-slate-100 text-slate-400 -rotate-12 scale-100 group-hover:rotate-0'}`}>
                       <service.Icon />
                     </div>
-                    <span className={`font-bold tracking-tight text-sm lg:text-base transition-colors ${selectedId === service.id ? 'text-slate-800' : ''}`}>{service.title}</span>
+                    <span className={`font-bold tracking-tight text-xs lg:text-base transition-colors ${selectedId === service.id ? 'text-slate-800' : ''}`}>{service.title}</span>
                   </div>
                   
                   <div className={`transition-all duration-300 ease-out hidden sm:block ${selectedId === service.id ? 'translate-x-0 opacity-100 ' + service.text : '-translate-x-2 opacity-0'}`}>
@@ -238,16 +238,16 @@ const Services: React.FC = () => {
             ))}
           </div>
 
-          {/* RIGHT: Detail Card (Fixed Size & Internal Scroll) */}
+          {/* RIGHT: Detail Card (Fixed Height on All Screens) */}
           <div className="lg:col-span-8 perspective-1000 w-full">
              <div 
                key={active.id}
-               // FIXED: md:h-[520px] enforces same height. Flex-row on desktop, flex-col on mobile.
-               className="w-full bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/60 overflow-hidden flex flex-col md:flex-row animate-spring-flip origin-center relative md:h-[520px]"
+               // FIXED HEIGHTS: h-[500px] on mobile, h-[550px] on desktop to maintain "Small Card" look while fitting content
+               className="w-full bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/60 overflow-hidden flex flex-col md:flex-row animate-spring-flip origin-center relative h-[500px] lg:h-[550px]"
              >
-                {/* IMAGE HALF: Fixed 5/12 width on desktop, fixed height on mobile */}
-                <div className="w-full md:w-5/12 relative overflow-hidden group h-48 md:h-full shrink-0">
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent z-10"></div>
+                {/* IMAGE HALF: Top 35% on mobile, Left 45% on Desktop */}
+                <div className="w-full h-[35%] md:w-5/12 md:h-full relative overflow-hidden group shrink-0">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10"></div>
                   <img 
                     src={active.img} 
                     alt={active.title}
@@ -255,47 +255,46 @@ const Services: React.FC = () => {
                   />
                   
                   <div className="absolute inset-0 z-20 flex items-center justify-center">
-                    <button className="w-14 h-14 cursor-pointer bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50 hover:scale-110 hover:bg-white/30 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:animate-pulse-slow">
+                    <button className="w-12 h-12 lg:w-16 lg:h-16 cursor-pointer bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/50 hover:scale-110 hover:bg-white/30 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] group-hover:animate-pulse-slow">
                         <Icons.Play />
                     </button>
                   </div>
                 </div>
 
-                {/* CONTENT HALF: Fixed 7/12 width on desktop */}
-                <div className="w-full md:w-7/12 p-6 md:p-8 flex flex-col relative bg-linear-to-br from-white to-slate-50 h-full">
+                {/* CONTENT HALF: Bottom 65% on mobile, Right 55% on Desktop */}
+                <div className="w-full h-[65%] md:w-7/12 md:h-full p-5 lg:p-8 flex flex-col relative bg-gradient-to-br from-white to-slate-50">
                     
-                   <div className={`absolute -right-8 -bottom-8 w-40 h-40 ${active.text} opacity-[0.04] rotate-12 scale-150 pointer-events-none transition-transform duration-700`}>
+                   <div className={`absolute -right-8 -bottom-8 w-32 h-32 lg:w-40 lg:h-40 ${active.text} opacity-[0.04] rotate-12 scale-150 pointer-events-none transition-transform duration-700`}>
                       <active.Icon />
                    </div>
 
                    {/* Header Section (Non-scrolling) */}
-                   <div className="mb-4 shrink-0 z-10 relative">
-                        <h3 className="text-3xl font-black text-slate-800 mb-2 animate-slide-right-spring delay-75 leading-tight">{active.title}</h3>
-                        <p className="text-slate-500 text-sm font-medium leading-relaxed animate-slide-right-spring delay-100">
+                   <div className="mb-3 lg:mb-4 shrink-0 z-10 relative">
+                        <h3 className="text-2xl lg:text-3xl font-black text-slate-800 mb-1 lg:mb-2 animate-slide-right-spring delay-75 leading-tight">{active.title}</h3>
+                        <p className="text-slate-500 text-xs lg:text-sm font-medium leading-relaxed animate-slide-right-spring delay-100 line-clamp-2">
                             {active.description}
                         </p>
                    </div>
                    
                    {/* SCROLLABLE LIST CONTAINER */}
-                   {/* flex-1 fills remaining space, overflow-y-auto enables internal scroll */}
                    <div className="flex-1 overflow-y-auto custom-scrollbar relative z-10 pr-2 pb-2">
-                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 sticky top-0 bg-white/95 backdrop-blur-sm py-2 z-20">
+                        <h4 className="text-[10px] lg:text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 sticky top-0 bg-white/95 backdrop-blur-sm py-2 z-20">
                             Includes
                         </h4>
                         
-                        <div className="space-y-3">
+                        <div className="space-y-2 lg:space-y-3">
                             {active.subCategories.map((item, i) => (
                                 <div 
                                     key={i} 
-                                    className="group flex items-start p-3 rounded-xl border border-slate-100 bg-white hover:border-slate-300 hover:shadow-md transition-colors duration-200 ease-out animate-slide-up-stagger transform-gpu"
+                                    className="group flex items-start p-2.5 lg:p-3 rounded-xl border border-slate-100 bg-white hover:border-slate-300 hover:shadow-md transition-colors duration-200 ease-out animate-slide-up-stagger transform-gpu"
                                     style={{ animationDelay: `${100 + (i*40)}ms`}}
                                 >
-                                    <div className={`mt-1.5 w-2 h-2 rounded-full mr-3 shrink-0 ${active.color} ring-2 ring-white shadow-sm group-hover:scale-125 transition-transform duration-300`}></div>
+                                    <div className={`mt-1.5 w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full mr-3 shrink-0 ${active.color} ring-2 ring-white shadow-sm group-hover:scale-125 transition-transform duration-300`}></div>
                                     <div>
-                                        <h5 className="text-sm font-bold text-slate-700 group-hover:text-slate-900 transition-colors">
+                                        <h5 className="text-xs lg:text-sm font-bold text-slate-700 group-hover:text-slate-900 transition-colors">
                                             {item.name}
                                         </h5>
-                                        <p className="text-xs text-slate-500 font-medium mt-0.5 leading-relaxed">
+                                        <p className="text-[10px] lg:text-xs text-slate-500 font-medium mt-0.5 leading-relaxed">
                                             {item.detail}
                                         </p>
                                     </div>
@@ -304,8 +303,8 @@ const Services: React.FC = () => {
                         </div>
                    </div>
 
-                   {/* Bottom Gradient Mask (To show there is more content) */}
-                   <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none z-20 rounded-br-2xl"></div>
+                   {/* Bottom Gradient Mask */}
+                   <div className="absolute bottom-0 left-0 right-0 h-6 lg:h-8 bg-gradient-to-t from-white to-transparent pointer-events-none z-20 rounded-br-2xl"></div>
 
                 </div>
              </div>
@@ -319,7 +318,7 @@ const Services: React.FC = () => {
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         /* Modern Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e2e8f0; border-radius: 20px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #cbd5e1; }

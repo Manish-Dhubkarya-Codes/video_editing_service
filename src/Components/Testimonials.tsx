@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { 
   FaVideo, 
   FaPalette, 
@@ -47,11 +47,54 @@ const positions = [
 ];
 
 const Careers: React.FC = () => {
-  
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const getWhatsAppLink = (message: string) => {
     const encodedMessage = encodeURIComponent(message);
     return `https://wa.me/${PHONE_NUMBER}?text=${encodedMessage}`;
   };
+
+  // --- Scroll Detection Logic ---
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    // Find the center of the viewport/container
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    // Iterate through children to find the one closest to center
+    Array.from(container.children).forEach((child, index) => {
+        // Skip the spacer div at the end if it exists
+        if (index >= positions.length) return;
+
+        const item = child as HTMLElement;
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(containerCenter - itemCenter);
+
+        if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+        }
+    });
+
+    if (closestIndex !== activeIndex) {
+        setActiveIndex(closestIndex);
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      // Run once on mount to determine initial state
+      handleScroll();
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [activeIndex]);
 
   return (
     <section id='careers' className="py-20 md:py-28 bg-gray-50 font-sans text-slate-800 overflow-hidden">
@@ -70,19 +113,18 @@ const Careers: React.FC = () => {
           </p>
         </div>
 
-        {/* --- Job Grid / Horizontal Scroll --- 
-           Mobile: Flex row + Overflow-x + Snap + Fixed Widths
-           Desktop: Normal Grid
-        */}
-        <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0 hide-scrollbar">
+        {/* --- Job Grid / Horizontal Scroll --- */}
+        <div 
+            ref={scrollRef} // Attached Ref
+            className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory px-4 md:px-0 -mx-4 md:mx-0 hide-scrollbar"
+        >
           {positions.map((job) => (
             <div 
               key={job.id} 
-              // min-w-[85vw] creates the "Peek" effect on mobile
               className="min-w-[85vw] md:min-w-0 snap-center bg-white rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 group flex flex-col h-full relative overflow-hidden"
             >
               {/* Top Decor Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
 
               {/* Icon & Title */}
               <div className="flex items-start justify-between mb-6">
@@ -138,10 +180,13 @@ const Careers: React.FC = () => {
           <div className="w-2 md:hidden shrink-0"></div>
         </div>
         
-        {/* Mobile Swipe Indicator Dots */}
-        <div className="flex md:hidden justify-center gap-1.5 mt-2">
+        {/* Mobile Swipe Indicator Dots - DYNAMIC */}
+        <div className="flex md:hidden justify-center gap-1.5 mt-2 transition-all duration-300">
             {positions.map((_, i) => (
-                <div key={i} className={`h-1.5 rounded-full ${i===0 ? 'w-4 bg-blue-500' : 'w-1.5 bg-gray-300'}`}></div>
+                <div 
+                    key={i} 
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex ? 'w-4 bg-blue-500' : 'w-1.5 bg-gray-300'}`}
+                ></div>
             ))}
         </div>
 

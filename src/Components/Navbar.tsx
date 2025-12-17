@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { FaBars, FaTimes, FaChevronRight } from 'react-icons/fa';
 import CompanyLogo from "../assets/Company_Logo.png"
-// --- Utility: Scramble Text (Kept your logic, just styled) ---
+
+// --- Utility: Scramble Text ---
 const ScrambleText = ({ text, className }: { text: string; className?: string }) => {
   const [displayText, setDisplayText] = useState(text);
   const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~';
@@ -52,7 +53,12 @@ const Navbar: React.FC = () => {
     { id: 'services', label: 'SERVICES' },
     { id: 'portfolio', label: 'PORTFOLIO' },
     { id: 'careers', label: 'CAREERS' },
-    // { id: 'pricing', label: 'ACCESS' },
+  ];
+
+  // Mobile/Side Nav Links (Includes Contact)
+  const mobileLinks = [
+    ...navLinks, 
+    { id: 'contact', label: 'CONTACT' }
   ];
 
   const scrollToSection = (id: string) => {
@@ -60,7 +66,7 @@ const Navbar: React.FC = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Animation Variants for Mobile Menu Stagger
+  // Animation Variants
   const menuVariants = {
     closed: { opacity: 0, x: "100%" },
     open: { opacity: 1, x: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
@@ -73,7 +79,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* --- MOBILE MENU OVERLAY --- */}
+      {/* --- MOBILE/TABLET SIDE MENU OVERLAY --- */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -82,7 +88,8 @@ const Navbar: React.FC = () => {
             exit="closed"
             variants={menuVariants}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-50 bg-[#020617] md:hidden flex flex-col items-center justify-center border-l border-[#00E6FF]/30"
+            // CHANGED: md:hidden to lg:hidden (Visible on mobile AND tablet now)
+            className="fixed inset-0 z-50 bg-[#020617] lg:hidden flex flex-col items-center justify-center border-l border-[#00E6FF]/30"
           >
             {/* Cyber Grid Background */}
             <div className="absolute inset-0 opacity-20 pointer-events-none bg-[linear-gradient(to_right,#00E6FF15_1px,transparent_1px),linear-gradient(to_bottom,#00E6FF15_1px,transparent_1px)] bg-[size:30px_30px]"></div>
@@ -95,7 +102,7 @@ const Navbar: React.FC = () => {
             </button>
 
             <div className="flex flex-col gap-8 items-center z-10 w-full px-8">
-              {navLinks.map((link, idx) => (
+              {mobileLinks.map((link, idx) => (
                 <motion.button
                   key={link.id}
                   variants={linkVariants}
@@ -106,7 +113,6 @@ const Navbar: React.FC = () => {
                     <span className="text-4xl font-black font-sans text-white group-hover:text-[#00E6FF] transition-colors tracking-tighter drop-shadow-[0_0_10px_rgba(0,230,255,0.3)]">
                         {link.label}
                     </span>
-                    {/* Mobile Bottom Border Animation */}
                     <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-[#00E6FF] shadow-[0_0_15px_#00E6FF] transition-all duration-300 group-hover:w-1/2"></span>
                 </motion.button>
               ))}
@@ -133,7 +139,7 @@ const Navbar: React.FC = () => {
             }
           `}
         >
-          {/* Animated Scanner Line (Appears when scrolled) */}
+          {/* Animated Scanner Line */}
           <div className={`absolute bottom-0 left-0 w-full h-[1px] overflow-hidden ${isScrolled ? 'rounded-full' : ''}`}>
             <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-[#00E6FF] to-transparent animate-[shimmer_3s_infinite] opacity-50" />
           </div>
@@ -143,8 +149,8 @@ const Navbar: React.FC = () => {
             className="flex items-center gap-3 cursor-pointer group pl-2"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border border-[#00E6FF]/30 rounded-sm group-hover:border-[#00E6FF] transition-colors duration-300">
-              <img src={CompanyLogo}/>
+            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border border-[#00E6FF]/30 rounded-full group-hover:border-[#00E6FF] transition-colors duration-300">
+              <img src={CompanyLogo} alt="Logo" />
               <div className="absolute inset-0 bg-[#00E6FF] opacity-0 group-hover:opacity-10 transition-opacity"></div>
             </div>
             <div className="flex flex-col">
@@ -157,40 +163,33 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop Links - THE REQUESTED ANIMATION STYLE */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Links - CHANGED: hidden md:flex to hidden lg:flex */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link, idx) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
                 className="group relative flex flex-col items-center justify-center py-2"
               >
-                {/* Number Prefix (Floating) */}
                 <span className="absolute -top-1 -right-3 text-[9px] text-[#00E6FF] opacity-0 -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 font-mono">
                    {`0${idx + 1}`}
                 </span>
 
                 <div className="flex items-center gap-2">
-                   {/* Tiny Arrow Slide-in */}
                    <FaChevronRight className="text-[10px] text-[#00E6FF] opacity-0 -translate-x-2 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
-                   
-                   {/* Scramble Text */}
                    <ScrambleText 
                       text={link.label} 
                       className="text-gray-300 text-sm tracking-wide transition-colors duration-300 group-hover:text-[#00E6FF]" 
                    />
                 </div>
 
-                {/* THE REQUESTED BORDER: Expands width + Glows #00E6FF */}
-                <span 
-                    className="absolute -bottom-0 left-0 h-1 w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"
-                ></span>
+                <span className="absolute -bottom-0 left-0 h-1 w-0 bg-[#00E6FF] shadow-[0_0_10px_#00E6FF] transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
           </div>
 
-          {/* CTA Button - "Initialize" */}
-          <div className="hidden md:flex pr-2">
+          {/* CTA Button - CHANGED: hidden md:flex to hidden lg:flex */}
+          <div className="hidden lg:flex pr-2">
             <button
               onClick={() => scrollToSection('contact')}
               className="
@@ -204,19 +203,15 @@ const Navbar: React.FC = () => {
                 CONTACT
                 <FaChevronRight size={10} className="group-hover:translate-x-1 transition-transform" />
               </div>
-              
-              {/* Button Fill Animation */}
               <div className="absolute inset-0 bg-[#00E6FF] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 opacity-20"></div>
-
-              {/* Corner Accents */}
               <span className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#00E6FF] transition-all duration-300 group-hover:w-full group-hover:h-full opacity-50" />
               <span className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#00E6FF] transition-all duration-300 group-hover:w-full group-hover:h-full opacity-50" />
             </button>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile/Tablet Toggle - CHANGED: md:hidden to lg:hidden */}
           <button 
-            className="md:hidden cursor-pointer text-white p-2 hover:text-[#00E6FF] transition-colors bg-white/5 rounded-md border border-white/10 hover:border-[#00E6FF]/50"
+            className="lg:hidden cursor-pointer text-white p-2 hover:text-[#00E6FF] transition-colors bg-white/5 rounded-md border border-white/10 hover:border-[#00E6FF]/50"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
@@ -224,7 +219,6 @@ const Navbar: React.FC = () => {
         </div>
       </motion.nav>
 
-      {/* Custom Styles for Animation */}
       <style>{`
         @keyframes shimmer {
             0% { transform: translateX(-100%); }

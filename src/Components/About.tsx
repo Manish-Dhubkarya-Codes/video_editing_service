@@ -12,7 +12,6 @@ const About: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Restored Asset Data from the previous version
   const assets = [
     { name: "Premiere_Pro_2024", type: "APP", size: "2.4 GB", color: "text-purple-700 bg-purple-50" },
     { name: "After_Effects_VFX", type: "COMP", size: "1.8 GB", color: "text-indigo-700 bg-indigo-50" },
@@ -27,8 +26,8 @@ const About: React.FC = () => {
       id="about"
       className="relative w-full min-h-screen bg-white text-slate-700 font-sans py-12 px-4 md:px-8 flex flex-col items-center gap-8"
     >
-      {/* --- VISUAL SHOWCASE HEADER (Restored Text) --- */}
-      <div className="text-center max-w-4xl mx-auto space-y-3">
+      {/* --- VISUAL SHOWCASE HEADER --- */}
+      <div className="text-center max-w-4xl mx-auto space-y-3 px-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-slate-500 text-xs font-bold tracking-wider border border-slate-200 uppercase">
           <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
           Post-Production Suite
@@ -44,64 +43,61 @@ const About: React.FC = () => {
       </div>
 
       {/* --- THE "APP WINDOW" CONTAINER --- */}
-      <div className="w-full max-w-[1600px] h-[85vh] bg-slate-50 rounded-2xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col relative ring-4 ring-slate-100">
+      {/* Responsive Height: h-auto on mobile, fixed h-[85vh] on desktop */}
+      <div className="w-full max-w-[1600px] h-auto lg:h-[85vh] bg-slate-50 rounded-2xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col relative ring-4 ring-slate-100">
         
         {/* --- APP BAR (Navigation) --- */}
-        <div className="w-full h-14 bg-white border-b border-slate-200 flex justify-between items-center px-6 shrink-0 z-50">
+        <div className="w-full h-14 bg-white border-b border-slate-200 flex justify-between items-center px-4 md:px-6 shrink-0 z-50">
           <div className="flex items-center gap-6">
             <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full bg-red-400/80 border border-red-500/30" />
               <div className="w-3 h-3 rounded-full bg-amber-400/80 border border-amber-500/30" />
               <div className="w-3 h-3 rounded-full bg-emerald-400/80 border border-emerald-500/30" />
             </div>
-            <div className="h-6 w-px bg-slate-200 mx-2" />
-            <div className="hidden lg:flex gap-8 text-xs font-bold uppercase tracking-wide text-slate-400">
-              <span className="hover:text-indigo-600 cursor-pointer transition">
-                Project
-              </span>
-              <span className="text-indigo-600 cursor-pointer border-b-2 border-indigo-600 pb-4 -mb-4">
-                Workspace
-              </span>
-              <span className="hover:text-indigo-600 cursor-pointer transition">
-                Effects
-              </span>
-              <span className="hover:text-indigo-600 cursor-pointer transition">
-                Export
-              </span>
+            <div className="h-6 w-px bg-slate-200 mx-2 hidden md:block" />
+            
+            {/* Menu items hidden on mobile */}
+            <div className="hidden md:flex gap-4 lg:gap-8 text-xs font-bold uppercase tracking-wide text-slate-400">
+              <span className="hover:text-indigo-600 cursor-pointer transition">Project</span>
+              <span className="text-indigo-600 cursor-pointer border-b-2 border-indigo-600 pb-4 -mb-4">Workspace</span>
+              <span className="hover:text-indigo-600 cursor-pointer transition">Effects</span>
+              <span className="hover:text-indigo-600 cursor-pointer transition">Export</span>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex px-3 py-1 bg-indigo-50 border border-indigo-200 rounded-md text-indigo-700 text-[10px] font-mono font-bold items-center gap-2">
               <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse"></span>
-              GPU: ACCELERATED
+              GPU: ON
             </div>
             <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-200">
-              <FaRegUserCircle  size={20} />
+              <FaRegUserCircle size={20} />
             </div>
           </div>
         </div>
 
         {/* --- MAIN WORKSPACE GRID --- */}
-        <div className="flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-0 bg-slate-50/50">
+        {/* Responsive Grid: Stacks vertically on mobile, grid on desktop */}
+        <div className="flex-1 p-2 md:p-4 flex flex-col lg:grid lg:grid-cols-12 gap-4 min-h-0 bg-slate-50/50 overflow-y-auto lg:overflow-hidden">
+          
           {/* --- LEFT COLUMN: PREVIEW MONITOR --- */}
-          <div className="lg:col-span-8 flex flex-col gap-3 h-full min-h-0">
+          <div className="lg:col-span-8 flex flex-col gap-3 min-h-[400px] lg:h-full lg:min-h-0">
             {/* Monitor Frame */}
             <div className="flex-1 relative bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden group flex flex-col min-h-0">
               {/* Top Info Bar */}
               <div className="h-8 border-b border-slate-100 bg-white flex justify-between items-center px-4 z-20 shrink-0">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide truncate max-w-[150px] md:max-w-none">
                   Program: Main_Intro_Final_v3.mp4
                 </span>
-                <div className="flex gap-4 font-mono text-[9px] text-slate-400">
-                  <span>ZOOM: FIT</span>
+                <div className="flex gap-4 font-mono text-[9px] text-slate-400 shrink-0">
+                  <span className="hidden sm:inline">ZOOM: FIT</span>
                   <span>RES: 4K</span>
                 </div>
               </div>
 
               {/* --- THE SCREEN CONTENT --- */}
               <div className="flex-1 relative bg-slate-100 flex items-center justify-center overflow-hidden isolate">
-                {/* Layer 1: Technical Grids */}
+                {/* Background Grid */}
                 <div
                   className="absolute inset-0 opacity-[0.06]"
                   style={{
@@ -111,15 +107,15 @@ const About: React.FC = () => {
                   }}
                 />
                 
-                {/* Layer 2: Safe Margins */}
-                <div className="absolute inset-8 border border-indigo-400/20 pointer-events-none"></div>
-                <div className="absolute inset-16 border border-dashed border-indigo-400/20 pointer-events-none"></div>
+                {/* Safe Margins */}
+                <div className="absolute inset-4 md:inset-8 border border-indigo-400/20 pointer-events-none"></div>
+                <div className="absolute inset-8 md:inset-16 border border-dashed border-indigo-400/20 pointer-events-none"></div>
 
-                {/* Layer 3: Tracking Points */}
+                {/* Tracking Points (Reduced on mobile) */}
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
-                    className="absolute text-slate-400/40 font-thin text-xl"
+                    className="absolute text-slate-400/40 font-thin text-xl hidden sm:block"
                     style={{
                       top: `${15 + Math.random() * 70}%`,
                       left: `${10 + Math.random() * 80}%`,
@@ -129,29 +125,22 @@ const About: React.FC = () => {
                   </div>
                 ))}
 
-                {/* Layer 5: Data Overlay */}
+                {/* Data Overlay */}
                 <div className="absolute top-4 right-4 text-right font-mono text-[9px] text-slate-400 leading-tight z-10">
                   <p>X: 3840</p>
                   <p>Y: 2160</p>
                   <p className="text-indigo-600 font-bold mt-1">REC.709</p>
                 </div>
 
-                {/* Layer 6: MAIN CONTENT (Restored Text) */}
-                 <div className="relative z-10 text-center p-8 max-w-3xl transform hover:scale-[1.01] transition-transform duration-500">
-                  {/* Transform Box */}
-                  <div className="absolute -inset-4 border border-sky-500/40 hidden group-hover:block pointer-events-none">
-                    <div className="absolute -top-1 -left-1 w-2 h-2 bg-sky-500"></div>
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-sky-500"></div>
-                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-sky-500"></div>
-                    <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-sky-500"></div>
-                  </div>
-
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur border border-rose-200 rounded-full text-rose-600 font-mono text-[10px] tracking-widest mb-6 shadow-sm mx-auto">
+                {/* Layer 6: MAIN CONTENT */}
+                 <div className="relative z-10 text-center p-4 md:p-8 max-w-3xl transform hover:scale-[1.01] transition-transform duration-500 w-full">
+                  
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur border border-rose-200 rounded-full text-rose-600 font-mono text-[10px] tracking-widest mb-4 md:mb-6 shadow-sm mx-auto">
                     <div className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-pulse" />
                     LIVE PREVIEW
                   </div>
 
-                  <h2 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 tracking-tighter leading-[0.9]">
+                  <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-800 mb-4 md:mb-6 tracking-tighter leading-[0.9]">
                     VIDEO EDITING <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-indigo-500 to-sky-500 animate-gradient-x bg-[length:200%_auto]">
                       ARCHITECT
@@ -159,10 +148,10 @@ const About: React.FC = () => {
                   </h2>
 
                   <div className="relative bg-white/70 backdrop-blur-sm p-4 rounded-xl border border-slate-200 shadow-sm max-w-lg mx-auto">
-<p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
-  "Sculpting time and emotion from raw footage. I don't just cut clips; I
-  craft immersive visual narratives where <span className="text-indigo-600 font-bold">rhythm meets impact</span>."
-</p>
+                    <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed">
+                      "Sculpting time and emotion from raw footage. I don't just cut clips; I
+                      craft immersive visual narratives where <span className="text-indigo-600 font-bold">rhythm meets impact</span>."
+                    </p>
                   </div>
                 </div>
               </div>
@@ -174,14 +163,14 @@ const About: React.FC = () => {
             </div>
 
             {/* Transport Controls */}
-            <div className="h-12 bg-white rounded-lg border border-slate-200 shadow-sm flex items-center justify-between px-6 shrink-0">
-              <div className="w-24 font-mono text-indigo-600 font-bold text-sm">
+            <div className="h-12 bg-white rounded-lg border border-slate-200 shadow-sm flex items-center justify-between px-4 md:px-6 shrink-0">
+              <div className="w-20 md:w-24 font-mono text-indigo-600 font-bold text-xs md:text-sm">
                 {timecode}
               </div>
 
               <div className="flex items-center gap-4 text-slate-400">
                 <button className="hover:text-indigo-600 transition transform hover:scale-110">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11 16.07V7.93c0-.81-.91-1.28-1.54-.82l-5.36 4.07c-.57.43-.57 1.21 0 1.64l5.36 4.07c.63.46 1.54-.01 1.54-.82zm1.92-4.07l5.36-4.07c.63-.46 1.54.01 1.54.82v8.14c0 .81-.91 1.28-1.54.82l-5.36-4.07c-.57-.43-.57-1.21 0-1.64z" />
                   </svg>
                 </button>
@@ -191,13 +180,13 @@ const About: React.FC = () => {
                   </svg>
                 </button>
                 <button className="hover:text-indigo-600 transition transform hover:scale-110">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M5.5 7.93v8.14c0 .81.91 1.28 1.54.82l5.36-4.07c.57-.43.57-1.21 0-1.64L7.04 7.11c-.63-.46-1.54.01-1.54.82zm13 0v8.14c0 .81-.91 1.28-1.54.82l-5.36-4.07c-.57-.43-.57-1.21 0-1.64l5.36-4.07c.63-.46 1.54.01 1.54.82z" />
                   </svg>
                 </button>
               </div>
 
-              <div className="w-24 flex justify-end gap-1">
+              <div className="w-16 md:w-24 flex justify-end gap-1">
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="h-1.5 w-1 bg-emerald-400/80 rounded-sm" />
                 ))}
@@ -205,8 +194,8 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: ASSETS (Restored Data) --- */}
-          <div className="lg:col-span-4 bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col overflow-hidden h-64 lg:h-auto min-h-0">
+          {/* --- RIGHT COLUMN: ASSETS --- */}
+          <div className="lg:col-span-4 bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col overflow-hidden h-64 lg:h-auto min-h-0 order-last lg:order-none">
             <div className="flex border-b border-slate-100 shrink-0">
               <div className="px-4 py-2 border-b-2 border-indigo-500 text-xs font-bold text-indigo-700 bg-indigo-50/50">
                 Project Bin
@@ -232,8 +221,8 @@ const About: React.FC = () => {
                       className="group hover:bg-slate-50 border-b border-slate-50 transition-colors cursor-pointer"
                     >
                       <td className="py-2 pl-2 flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-sm bg-slate-200 border border-slate-300"></div>
-                        <span className="group-hover:text-indigo-600 font-semibold truncate">
+                        <div className="w-3 h-3 rounded-sm bg-slate-200 border border-slate-300 shrink-0"></div>
+                        <span className="group-hover:text-indigo-600 font-semibold truncate max-w-[100px] sm:max-w-none">
                           {item.name}
                         </span>
                       </td>
@@ -257,8 +246,8 @@ const About: React.FC = () => {
             </div>
           </div>
 
-          {/* --- BOTTOM ROW: TIMELINE (Restored Data) --- */}
-          <div className="lg:col-span-12 h-40 lg:h-48 bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col overflow-hidden shrink-0">
+          {/* --- BOTTOM ROW: TIMELINE --- */}
+          <div className="lg:col-span-12 h-48 lg:h-48 bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col overflow-hidden shrink-0">
             {/* Timeline Toolbar */}
             <div className="h-8 border-b border-slate-100 bg-slate-50/50 flex items-center px-4 gap-4 shrink-0">
               <span className="text-[10px] font-bold text-slate-600">
@@ -272,8 +261,8 @@ const About: React.FC = () => {
             </div>
 
             <div className="flex flex-1 overflow-hidden relative">
-              {/* Track Headers */}
-              <div className="w-16 bg-slate-50 border-r border-slate-200 flex flex-col pt-4 z-20 shadow-sm shrink-0">
+              {/* Track Headers (Reduced width on mobile) */}
+              <div className="w-10 md:w-16 bg-slate-50 border-r border-slate-200 flex flex-col pt-4 z-20 shadow-sm shrink-0">
                 <div className="h-8 border-b border-white flex flex-col justify-center px-2 bg-slate-100/50">
                   <span className="text-[9px] font-bold text-slate-500">V2</span>
                 </div>
@@ -286,9 +275,9 @@ const About: React.FC = () => {
               </div>
 
               {/* Timeline Content */}
-              <div className="flex-1 relative bg-slate-100/30 overflow-hidden">
+              <div className="flex-1 relative bg-slate-100/30 overflow-x-auto overflow-y-hidden">
                 {/* Ruler */}
-                <div className="h-4 bg-white border-b border-slate-200 flex items-end">
+                <div className="h-4 bg-white border-b border-slate-200 flex items-end min-w-[600px]">
                   {[...Array(50)].map((_, i) => (
                     <div
                       key={i}
@@ -303,8 +292,8 @@ const About: React.FC = () => {
                 </div>
 
                 {/* Tracks */}
-                <div className="pt-0">
-                  {/* V2 - Hours Rendered */}
+                <div className="pt-0 min-w-[600px]">
+                  {/* V2 */}
                   <div className="h-8 border-b border-slate-200/50 w-full relative">
                     <div className="absolute left-[35%] w-[25%] top-1 bottom-1 bg-purple-100 border border-purple-200 rounded flex items-center px-2">
                       <span className="text-[8px] font-semibold text-purple-700 truncate">
@@ -312,7 +301,7 @@ const About: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  {/* V1 - Projects & Clients */}
+                  {/* V1 */}
                   <div className="h-8 border-b border-slate-200/50 w-full relative">
                     <div className="absolute left-0 w-[30%] top-1 bottom-1 bg-indigo-100 border border-indigo-200 rounded flex items-center px-2">
                       <span className="text-[8px] font-semibold text-indigo-700 truncate">
@@ -327,7 +316,7 @@ const About: React.FC = () => {
                   </div>
                   {/* Gap */}
                   <div className="h-1 w-full bg-slate-200/30"></div>
-                  {/* A1 - Audio Waveform */}
+                  {/* A1 */}
                   <div className="h-8 border-b border-slate-200/50 w-full relative mt-0">
                     <div className="absolute left-0 right-0 mx-2 top-1 bottom-1 bg-emerald-50 border border-emerald-100 rounded flex items-center px-2 overflow-hidden">
                       <div className="flex items-center gap-[1px] w-full h-full opacity-50">
@@ -355,6 +344,14 @@ const About: React.FC = () => {
         }
         .animate-gradient-x {
           animation: gradient-x 3s ease infinite;
+        }
+        /* Custom scrollbar hiding for cleaner UI */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
       `}</style>
     </section>

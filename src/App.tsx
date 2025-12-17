@@ -27,9 +27,6 @@ const App: React.FC = () => {
         <Services />
       </ScrollReveal>
 
-      {/* Example: Connect Services (Neutral) to Portfolio (White) smoothly */}
-      {/* If Services is bg-neutral and Portfolio is bg-white, the standard cut is fine. 
-          But ensuring 0 margin is key. */}
 
       <ScrollReveal>
         <Portfolio />

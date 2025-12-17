@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { 
   FaFileImport, 
   FaClipboardList, 
@@ -63,6 +63,49 @@ const stepVariants = {
 };
 
 const Workflow: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // --- IMPROVED: Center Proximity Scroll Handler ---
+  // This calculates exactly which card is in the middle of the container
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    // Get the center point of the visible container
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    // Loop through all child cards to find which one is closest to the center
+    // We cast children to HTMLElement to access offsetLeft/offsetWidth
+    Array.from(container.children).forEach((child, index) => {
+        const item = child as HTMLElement;
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(containerCenter - itemCenter);
+
+        if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+        }
+    });
+
+    if (closestIndex !== activeIndex) {
+        setActiveIndex(closestIndex);
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      // Run once on mount to ensure correct initial state
+      handleScroll();
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, [activeIndex]);
+
   return (
     <section id="workflow" className="py-12 md:py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -82,10 +125,10 @@ const Workflow: React.FC = () => {
           className="relative"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }} // Changed amount to ensure it triggers earlier
+          viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
         >
-          {/* CONNECTOR LINE (Visible only on XL screens where items are in 1 row) */}
+          {/* CONNECTOR LINE (Visible only on XL screens) */}
           <div className="hidden xl:block absolute top-12 left-0 w-full h-1 bg-gray-100 -z-10 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-blue-400 to-blue-600"
@@ -96,28 +139,25 @@ const Workflow: React.FC = () => {
             />
           </div>
           
-          {/* GRID LOGIC FIXED:
-             - Mobile: Flex (Scrollable)
-             - Tablet/Laptop (md/lg): Grid 3 Columns (2 Rows) -> Ensures all 6 are visible
-             - Large Desktop (xl): Grid 6 Columns (1 Row)
-          */}
-<div
-  className="
-    flex
-    md:grid
-    md:grid-cols-3
-    md:grid-rows-2
-    xl:grid-cols-6
-    xl:grid-rows-1
-    gap-6 lg:gap-8
-    overflow-x-auto
-    md:overflow-visible
-    pb-8 md:pb-0
-    snap-x snap-mandatory
-    px-2 md:px-0
-  "
->
-            
+          {/* GRID / SCROLL CONTAINER */}
+          <div
+            ref={scrollRef}
+            className="
+              flex
+              md:grid
+              md:grid-cols-3
+              md:grid-rows-2
+              xl:grid-cols-6
+              xl:grid-rows-1
+              gap-6 lg:gap-8
+              overflow-x-auto
+              md:overflow-visible
+              pb-8 md:pb-0
+              snap-x snap-mandatory
+              px-2 md:px-0
+              hide-scrollbar
+            "
+          >
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -149,12 +189,7 @@ const Workflow: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Arrow Logic: 
-                      - Hidden on Mobile 
-                      - On XL (1 Row): Show Right Arrow on all except last
-                      - On MD/LG (2 Rows): Show Right Arrow on items 1,2,4,5. Show Down arrow on 3? Or just hide arrows for cleaner look on grid.
-                      (Simplifying: Only showing arrows on XL screens to prevent visual clutter in grid mode)
-                  */}
+                  {/* Arrow (XL only) */}
                   {index !== steps.length - 1 && (
                     <div className="hidden xl:block absolute top-10 -right-4 text-gray-200 text-xl z-0">
                       <FaChevronRight />
@@ -165,15 +200,23 @@ const Workflow: React.FC = () => {
             ))}
           </div>
           
-          {/* Mobile "Swipe" Hint */}
-          <div className="md:hidden flex justify-center mt-4 gap-1">
-              {[...Array(6)].map((_, i) => (
-                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i===0 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+          {/* Mobile "Swipe" Dots */}
+          <div className="md:hidden flex justify-center mt-4 gap-2">
+              {steps.map((_, i) => (
+                  <div 
+                    key={i} 
+                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${i === activeIndex ? 'bg-blue-600' : 'bg-gray-300'}`}
+                  ></div>
               ))}
           </div>
 
         </motion.div>
       </div>
+      <style>{`
+        /* Hide scrollbar for cleaner look */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   );
 };
