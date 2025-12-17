@@ -25,7 +25,7 @@ const faqs = [
   // --- Payment & Money specific FAQ as requested ---
   { 
     question: 'What are your rates and payment terms?', 
-    answer: 'Every project is unique, and we tailor our pricing to match your specific needs and volume. For custom quotes, billing inquiries, and payment arrangements, please contact us directly via WhatsApp or Call us at +1 (555) 123-4567.' 
+    answer: 'Every project is unique, and we tailor our pricing to match your specific needs and volume. For custom quotes, billing inquiries, and payment arrangements, please contact us directly via WhatsApp or Call us at +918224889744.' 
   },
 ];
 

@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
       id: 6, 
       icon: FaEnvelope, 
       label: 'Email', 
-      href: 'mailto:info@ediitz.com', 
+      href: 'mailto:trendingediitz@gmail.com', 
       color: 'text-blue-400', 
       hoverBorder: 'hover:border-blue-400' 
     },
@@ -113,7 +113,7 @@ const Contact: React.FC = () => {
 
       case 'email':
          // Mailto supports body text
-        url = `mailto:info@ediitz.com?subject=New Project Request from ${formData.name}&body=${encodedMessage}`;
+        url = `mailto:trendingediitz@gmail.com?subject=New Project Request from ${formData.name}&body=${encodedMessage}`;
         window.open(url, '_blank');
         break;
 

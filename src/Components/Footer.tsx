@@ -69,9 +69,9 @@ const Footer: React.FC = () => {
           
           {/* Column 1: Brand Info */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 text-2xl font-bold tracking-tight text-slate-900">
-              <span className="bg-sky-100 text-sky-600 border border-sky-200 px-2 py-1 rounded-lg text-xs uppercase tracking-wider">Trending</span>
-              <span>Ediitz...</span>
+            <div className="flex noto-serif items-center gap-2 text-2xl font-bold tracking-tight text-slate-900">
+              <span className="bg-sky-100  text-sky-600 border border-sky-200 px-2 py-1 rounded-lg text-[20px] tracking-wider">Trending</span>
+              <span className='tracking-wider'>Ediitz...</span>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed">
               We turn raw footage into cinematic masterpieces. Trusted by over 500+ creators and brands worldwide to deliver high-retention video content.

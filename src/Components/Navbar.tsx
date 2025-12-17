@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { FaBars, FaTimes, FaChevronRight } from 'react-icons/fa';
 import CompanyLogo from "../assets/Company_Logo.png"
@@ -76,6 +76,10 @@ const Navbar: React.FC = () => {
     closed: { opacity: 0, x: 50 },
     open: { opacity: 1, x: 0 }
   };
+useEffect(() => {
+  document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+  document.body.style.touchAction = isMenuOpen ? 'none' : '';
+}, [isMenuOpen]);
 
   return (
     <>
@@ -146,19 +150,19 @@ const Navbar: React.FC = () => {
 
           {/* Logo Section */}
           <div 
-            className="flex items-center gap-3 cursor-pointer group pl-2"
+            className="flex items-center gap-3 cursor-pointer group"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border border-[#00E6FF]/30 rounded-full group-hover:border-[#00E6FF] transition-colors duration-300">
+            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden p-1 bg-blue-500/20 border rounded-full border-[#00E6FF] transition-colors duration-300">
               <img src={CompanyLogo} alt="Logo" />
               <div className="absolute inset-0 bg-[#00E6FF] opacity-0 group-hover:opacity-10 transition-opacity"></div>
             </div>
-            <div className="flex flex-col">
-              <span className="font-sans font-bold text-lg tracking-[0.2em] text-white leading-none drop-shadow-md group-hover:text-[#00E6FF] transition-colors">
-                TRENDING
+            <div className="flex noto-serif flex-col">
+              <span className=" font-bold text-lg tracking-[0.1em] text-white leading-none drop-shadow-md  transition-colors">
+                Trending
               </span>
-              <span className="font-mono text-lg text-[#00E6FF] tracking-[0.2em]">
-                EDIITZ...
+              <span className="text-lg text-[#00E6FF] tracking-[0.1em]">
+                Ediitz...
               </span>
             </div>
           </div>
